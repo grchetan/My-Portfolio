@@ -79,6 +79,11 @@ nav ul li a:hover {
 .myimage img {
   height: 400px;
   border-radius: 50%;
+  box-shadow: 0 0 30px 15px rgba(0, 128, 255, 0.14);
+  transition: box-shadow 0.3s ease;
+}
+.myimage img:hover {
+  box-shadow: 0 0 30px 15px rgba(0, 128, 255, 0.477);
 }
 
 .hero-name h1 {
@@ -180,11 +185,7 @@ nav ul li a:hover {
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.304);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-@media (max-width: 376px) {
-  .Certificate-box {
-    white-space: wrap;
-  }
-}
+
 .Certificate-box:hover {
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.732);
   transform: translateY(-10px);
@@ -281,12 +282,24 @@ nav ul li a:hover {
 }
 
 .contact-item {
+  flex-basis: 400px;
   flex-grow: 1;
   height: auto;
   margin: 20px;
   display: flex;
   flex-direction: column;
   padding: 2.2rem;
+}
+
+.contact-info {
+  flex-basis: 400px;
+  flex-grow: 1;
+}
+
+.contact-item form {
+  height: auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .contact-item h1 {
@@ -321,26 +334,22 @@ input[type="submit"]:hover {
 }
 
 textarea {
+  font-family: "Poppins", sans-serif;
   padding: 8px 12px;
   resize: none;
   width: 70%;
   height: 250px;
 }
+
 input[type="text"]::placeholder,
 input[type="email"]::placeholder,
 textarea::placeholder {
   font-family: cursive;
 }
 
-.contact-info {
-  margin-top: 50px;
-  flex-basis: 400px;
-  flex-grow: 1;
-}
-
 .contact-info h1 {
-  margin-top: 20px;
   margin-bottom: 40px;
+  margin-top: 50px;
 }
 
 .contact-info p {
@@ -349,6 +358,12 @@ textarea::placeholder {
 }
 .contact-info p a {
   text-decoration: none;
+  transition: text-decoration 0.4s ease;
+}
+.contact-info p a:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 5px;
 }
 
 footer {
@@ -433,15 +448,21 @@ footer h1 {
     margin-right: 0;
     padding: 7px;
   }
-  nav ul {
-    gap: 0.7rem;
+  .nav-links {
     margin-right: 0;
   }
+  nav ul {
+    gap: 0.7rem;
+  }
+  nav ul li a {
+    font-size: 1rem;
+  }
 }
+
+/* Hero Container */
 @media (max-width: 769px) {
   .hero-container {
     flex-direction: column;
-    margin-right: -2px;
   }
   div.myimage {
     order: 1;
@@ -465,7 +486,8 @@ footer h1 {
   }
 }
 
-@media (max-width: 480px) {
+/* About Container or H1 , p */
+@media (max-width: 769px) {
   .About {
     padding-top: 0.2rem;
     margin: 10px auto;
@@ -482,8 +504,50 @@ footer h1 {
   }
 }
 
+/* About Container */
+@media (max-width: 769px) {
+  .Certificate-container-h1 {
+    font-size: 1.5rem;
+    padding: 0;
+  }
+  .Certificate-container-p {
+    font-size: 1rem;
+    padding: 0;
+  }
+}
+
+/* Skills H1 or ul */
+@media (max-width: 769pc) {
+  .skill-item h1 {
+    font-size: 1.5rem;
+  }
+
+  .skill-item h2,
+  .skill-item ul li {
+    font-size: 1rem;
+  }
+
+  /*Project h1 or p*/
+  .project-items h1 {
+    font-size: 1.5rem;
+  }
+  .project-items h2 {
+    font-size: 1.2rem;
+  }
+  .project-items p {
+    font-size: 1rem;
+  }
+
+  /* Contact */
+  .contact-item h1 {
+    font-size: 1.5rem;
+  }
+}
 /* Items Container padding or marging */
 @media (max-width: 768px) {
+  .About {
+    padding-top: 4rem;
+  }
   div.About-items {
     padding: 10px;
     margin: 0;
@@ -496,21 +560,37 @@ footer h1 {
     margin: 0;
     padding: 10px;
   }
+  .Certificate-box {
+    margin: 0;
+    margin-top: 15px;
+  }
   .contact-item {
     margin: 0;
     padding: 10px;
   }
   .contact-info {
-    flex-grow: 0;
+    flex-grow: 1;
+    padding: 10px;
+  }
+  .n-video {
+    display: flex;
+    justify-content: center;
   }
   .n-video video {
-    width: 300px;
+    width: 270px;
     overflow: hidden;
     padding: 10px;
     border: 1px solid transparent;
     box-shadow: 0 4px 8px transparent;
   }
 }
+@media (max-width: 376px) {
+  .Certificate-box {
+    white-space: wrap;
+  }
+}
+
+/* Contact or Contact with me items*/
 
 @media (max-width: 768px) {
   input[type="text"],
@@ -518,13 +598,21 @@ footer h1 {
     width: auto;
   }
   textarea {
-    margin-top: 10px;
+    height: 150px;
+  }
+  .contact {
+    padding: 0;
+    padding-top: 1.9rem;
+  }
+  .contact-info p {
+    font-size: 1rem;
   }
 }
 
+/*Footer Container all items*/
 @media (max-width: 769px) {
   footer {
-    margin-right: -2px;
+    height: auto;
   }
   footer h1 {
     font-size: 1.2rem;
