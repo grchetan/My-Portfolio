@@ -489,14 +489,19 @@ footer h1 {
 /* About Container or H1 , p */
 @media (max-width: 769px) {
   .About {
-    padding-top: 0.2rem;
+    padding-top: 4rem;
     margin: 10px auto;
+  }
+  div.About-items {
+    padding: 10px;
+    margin: 0;
+    flex-basis: 400px;
+    flex-grow: 1;
   }
   .About-items h1 {
     margin-bottom: 15px;
     font-size: 1.5rem;
   }
-
   .About-items p {
     margin-bottom: 15px;
     padding: 4px;
@@ -504,7 +509,7 @@ footer h1 {
   }
 }
 
-/* About Container */
+/* Certificate h1 or p Container */
 @media (max-width: 769px) {
   .Certificate-container-h1 {
     font-size: 1.5rem;
@@ -545,13 +550,6 @@ footer h1 {
 }
 /* Items Container padding or marging */
 @media (max-width: 768px) {
-  .About {
-    padding-top: 4rem;
-  }
-  div.About-items {
-    padding: 10px;
-    margin: 0;
-  }
   .skill-item {
     margin: 0;
     padding: 10px;
