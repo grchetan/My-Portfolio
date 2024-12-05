@@ -1,4 +1,4 @@
-# Portfolio Website - GR Chetan
+# Portfolio Website - Chetan Prajapat
 
 ## About
 This is my personal portfolio website designed to showcase my skills, projects, and achievements. You are welcome to use this as inspiration or a base for your own portfolio, but **proper credit must be given**.
