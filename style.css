@@ -61,7 +61,7 @@ nav ul li a:hover {
 .hero-container {
   display: flex;
   flex-wrap: wrap;
-  background: linear-gradient(to right, #1e1627, #0c0b0b);
+  background-color: #121212;
   height: 100vh;
   justify-content: center;
   text-align: center;
@@ -81,24 +81,24 @@ nav ul li a:hover {
   flex: 1;
   background-color: #1877f2;
   border-radius: 35% 5% 35% 5%;
-  box-shadow: 0 0 30px 15px rgba(0, 128, 255, 0.14);
   animation: glowEffect 2s infinite alternate;
   overflow: hidden;
 }
 .myimage img {
   height: 400px;
   transform: scale(1.3);
-  transition: transform 0.6s ease-in-out;
+  transition: transform 0.6s ease-in-out, filter 1s ease-in-out;
+  filter: grayscale(10%);
 }
 
 @keyframes glowEffect {
   0% {
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2),
-      0 0 20px rgba(0, 255, 255, 0.4), 0 0 30px rgba(0, 255, 255, 0.6);
+    box-shadow: 0 0 1px rgba(255, 255, 255, 0.2),
+      0 0 20px rgba(236, 238, 238, 0.4), 0 0 30px rgba(0, 255, 255, 0.6);
   }
   100% {
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5),
-      0 0 40px rgba(0, 255, 255, 0.7), 0 0 60px rgba(0, 255, 255, 1);
+    box-shadow: 0 0 1px rgba(255, 255, 255, 0.5),
+      0 0 40px rgba(0, 255, 255, 0.7);
   }
 }
 
@@ -201,7 +201,7 @@ nav ul li a:hover {
 .Certificate-box {
   white-space: nowrap;
   text-align: center;
-  flex-grow: 1; /* Ise item apne parent se space lega or 0 karne se nahi leta hai*/
+  flex-grow: 0; /* Ise item apne parent se space lega or 0 karne se nahi leta hai*/
   flex-basis: 400px;
   margin: 1.1rem;
   padding: 1.2rem;
@@ -463,6 +463,23 @@ footer h1 {
 
 .reserved p {
   color: white;
+}
+.top-btn {
+  position: fixed;
+  bottom: 60px;
+  right: 10px;
+  z-index: 1000;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 50%;
+}
+.top-btn:hover {
+  background-color: #2f2d2d6b; /* Change color on hover */
+}
+
+.top-btn a i {
+  font-size: 33px;
+  color: rgb(72, 70, 70);
 }
 
 /* Hero Contaainer Mobile and Tablet code responsive */
