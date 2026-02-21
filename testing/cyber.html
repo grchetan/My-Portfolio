@@ -1,0 +1,1830 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cyber Security Expert | Ethical Hacker Portfolio</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: { primary: "#00FF41", secondary: "#00F0FF" },
+            borderRadius: {
+              none: "0px",
+              sm: "4px",
+              DEFAULT: "8px",
+              md: "12px",
+              lg: "16px",
+              xl: "20px",
+              "2xl": "24px",
+              "3xl": "32px",
+              full: "9999px",
+              button: "8px",
+            },
+          },
+        },
+      };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+    />
+    <style>
+      :where([class^="ri-"])::before {
+        content: "\f3c2";
+      }
+
+      body {
+        background-color: #0a0a0a;
+        font-family: "Source Code Pro", monospace;
+        color: #e0e0e0;
+        overflow-x: hidden;
+      }
+
+      .matrix-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        opacity: 0.15;
+      }
+
+      .grid-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: linear-gradient(
+            rgba(0, 240, 255, 0.03) 1px,
+            transparent 1px
+          ),
+          linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+        background-size: 20px 20px;
+        z-index: -1;
+      }
+
+      .orbitron {
+        font-family: "Orbitron", sans-serif;
+      }
+
+      .terminal {
+        background-color: rgba(15, 15, 15, 0.8);
+        border: 1px solid rgba(0, 255, 65, 0.3);
+        box-shadow: 0 0 15px rgba(0, 255, 65, 0.2);
+      }
+
+      .terminal-header {
+        background-color: rgba(0, 255, 65, 0.1);
+        border-bottom: 1px solid rgba(0, 255, 65, 0.3);
+      }
+
+      .cursor {
+        display: inline-block;
+        width: 10px;
+        height: 20px;
+        background-color: #00ff41;
+        animation: blink 1s infinite;
+      }
+
+      @keyframes blink {
+        0%,
+        49% {
+          opacity: 1;
+        }
+        50%,
+        100% {
+          opacity: 0;
+        }
+      }
+
+      .glitch-hover:hover {
+        animation: glitch 0.3s linear;
+      }
+
+      @keyframes glitch {
+        0% {
+          transform: translate(0);
+        }
+        20% {
+          transform: translate(-2px, 2px);
+        }
+        40% {
+          transform: translate(-2px, -2px);
+        }
+        60% {
+          transform: translate(2px, 2px);
+        }
+        80% {
+          transform: translate(2px, -2px);
+        }
+        100% {
+          transform: translate(0);
+        }
+      }
+
+      .hex {
+        clip-path: polygon(
+          50% 0%,
+          100% 25%,
+          100% 75%,
+          50% 100%,
+          0% 75%,
+          0% 25%
+        );
+      }
+
+      .cyber-button {
+        position: relative;
+        overflow: hidden;
+        transition: all 0.3s ease;
+      }
+
+      .cyber-button:hover {
+        box-shadow: 0 0 15px rgba(0, 255, 65, 0.5);
+      }
+
+      .cyber-button:hover::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(0, 255, 65, 0.2),
+          transparent
+        );
+        animation: cyber-button-animation 1s;
+      }
+
+      @keyframes cyber-button-animation {
+        0% {
+          left: -100%;
+        }
+        100% {
+          left: 100%;
+        }
+      }
+
+      .typewriter {
+        overflow: hidden;
+        white-space: nowrap;
+        border-right: 2px solid #00ff41;
+        animation: typing 3.5s steps(40, end),
+          blink-caret 0.75s step-end infinite;
+      }
+
+      @keyframes typing {
+        from {
+          width: 0;
+        }
+        to {
+          width: 100%;
+        }
+      }
+
+      @keyframes blink-caret {
+        from,
+        to {
+          border-color: transparent;
+        }
+        50% {
+          border-color: #00ff41;
+        }
+      }
+
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: #0a0a0a;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: #00ff41;
+        border-radius: 4px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: #00f0ff;
+      }
+
+      .custom-checkbox {
+        appearance: none;
+        width: 20px;
+        height: 20px;
+        border: 2px solid rgba(0, 255, 65, 0.5);
+        background-color: transparent;
+        display: inline-block;
+        position: relative;
+        cursor: pointer;
+      }
+
+      .custom-checkbox:checked {
+        background-color: rgba(0, 255, 65, 0.2);
+      }
+
+      .custom-checkbox:checked::after {
+        content: "";
+        position: absolute;
+        left: 6px;
+        top: 2px;
+        width: 5px;
+        height: 10px;
+        border: solid #00ff41;
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg);
+      }
+
+      .custom-switch {
+        position: relative;
+        display: inline-block;
+        width: 50px;
+        height: 24px;
+      }
+
+      .custom-switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+
+      .switch-slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(15, 15, 15, 0.8);
+        border: 1px solid rgba(0, 255, 65, 0.3);
+        transition: 0.4s;
+        border-radius: 24px;
+      }
+
+      .switch-slider:before {
+        position: absolute;
+        content: "";
+        height: 16px;
+        width: 16px;
+        left: 4px;
+        bottom: 3px;
+        background-color: rgba(0, 255, 65, 0.7);
+        transition: 0.4s;
+        border-radius: 50%;
+      }
+
+      input:checked + .switch-slider {
+        background-color: rgba(0, 255, 65, 0.2);
+      }
+
+      input:checked + .switch-slider:before {
+        transform: translateX(26px);
+        background-color: #00ff41;
+      }
+
+      .flicker {
+        animation: flicker 8s infinite;
+      }
+
+      @keyframes flicker {
+        0%,
+        19.999%,
+        22%,
+        62.999%,
+        64%,
+        64.999%,
+        70%,
+        100% {
+          opacity: 1;
+        }
+        20%,
+        21.999%,
+        63%,
+        63.999%,
+        65%,
+        69.999% {
+          opacity: 0.8;
+        }
+      }
+
+      .city-skyline {
+        height: 80px;
+        background-image: url("https://public.readdy.ai/ai/img_res/564cd71e6d9e0fdc36fb5d7e419908cc.jpg");
+        background-size: cover;
+        background-position: center;
+        opacity: 0.5;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="matrix" class="matrix-bg"></canvas>
+    <div class="grid-overlay"></div>
+
+    <header class="py-4 px-6 border-b border-primary/30 relative z-10">
+      <div class="container mx-auto flex justify-between items-center">
+        <div class="flex items-center">
+          <div class="w-10 h-10 flex items-center justify-center mr-4">
+            <i class="ri-user-3-fill text-primary ri-2x"></i>
+          </div>
+          <h1 class="font-['Pacifico'] text-primary text-2xl">GR Chetan</h1>
+        </div>
+
+        <nav class="hidden md:flex items-center space-x-8">
+          <a
+            href="#"
+            class="text-primary hover:text-secondary glitch-hover transition-colors"
+          >
+            <span class="text-secondary">&gt;</span> Home
+          </a>
+          <a
+            href="#"
+            class="text-white hover:text-primary glitch-hover transition-colors"
+          >
+            <span class="text-secondary">&gt;</span> Services
+          </a>
+          <a
+            href="#"
+            class="text-white hover:text-primary glitch-hover transition-colors"
+          >
+            <span class="text-secondary">&gt;</span> Portfolio
+          </a>
+          <a
+            href="#"
+            class="text-white hover:text-primary glitch-hover transition-colors"
+          >
+            <span class="text-secondary">&gt;</span> About
+          </a>
+          <a
+            href="#"
+            class="text-white hover:text-primary glitch-hover transition-colors"
+          >
+            <span class="text-secondary">&gt;</span> Contact
+          </a>
+        </nav>
+
+        <div class="flex items-center">
+          <div class="orbitron text-secondary text-sm mr-4 hidden md:block">
+            <span id="current-date">2025-04-06</span> |
+            <span id="current-time">00:00:00</span>
+          </div>
+          <button
+            class="cyber-button bg-black/50 text-primary border border-primary/50 px-4 py-2 !rounded-button hover:bg-primary/10 transition-all whitespace-nowrap"
+          >
+            <span class="text-secondary">&gt;</span> Connect
+          </button>
+        </div>
+
+        <div class="md:hidden w-8 h-8 flex items-center justify-center">
+          <i class="ri-menu-line text-primary ri-2x"></i>
+        </div>
+      </div>
+    </header>
+
+    <section
+      class="hero relative overflow-hidden py-16 md:py-24 border-b border-primary/30"
+    >
+      <div class="container mx-auto px-6 w-full">
+        <div class="flex flex-col md:flex-row items-center">
+          <div class="w-full md:w-1/2 mb-10 md:mb-0">
+            <div class="terminal p-6 !rounded-lg">
+              <div
+                class="terminal-header flex items-center p-2 mb-4 !rounded-t-lg"
+              >
+                <div class="w-3 h-3 !rounded-full bg-red-500 mr-2"></div>
+                <div class="w-3 h-3 !rounded-full bg-yellow-500 mr-2"></div>
+                <div class="w-3 h-3 !rounded-full bg-green-500"></div>
+                <div class="ml-4 text-xs text-primary/70">
+                  terminal@cyberdefense:~
+                </div>
+              </div>
+
+              <div class="space-y-4">
+                <div>
+                  <span class="text-secondary">&gt;</span>
+                  <span class="text-primary">./initialize_system.sh</span>
+                </div>
+
+                <div>
+                  <span class="text-gray-400"
+                    >System initialized. Welcome to CyberDefense Terminal.</span
+                  >
+                </div>
+
+                <div>
+                  <span class="text-secondary">&gt;</span>
+                  <span class="text-primary">./run_introduction.exe</span>
+                </div>
+
+                <h1
+                  class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mt-2 mb-4 typewriter orbitron"
+                >
+                  Ethical Hacking & <br />Cyber Security Expert
+                </h1>
+
+                <p class="text-gray-300 mb-6">
+                  I protect digital assets by finding vulnerabilities before
+                  malicious actors do. With over 10 years of experience in
+                  penetration testing, network security, and digital forensics,
+                  I provide elite cybersecurity services for businesses and
+                  organizations worldwide.
+                </p>
+
+                <div class="flex flex-wrap gap-4">
+                  <button
+                    class="cyber-button bg-primary/10 text-primary border border-primary px-6 py-3 !rounded-button hover:bg-primary/20 transition-all whitespace-nowrap"
+                  >
+                    <span class="text-white">&gt;</span> Explore Services
+                  </button>
+                  <button
+                    class="cyber-button bg-transparent text-secondary border border-secondary/50 px-6 py-3 !rounded-button hover:bg-secondary/10 transition-all whitespace-nowrap"
+                  >
+                    <span class="text-white">&gt;</span> View Portfolio
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="w-full md:w-1/2 flex justify-center">
+            <div class="relative w-full max-w-lg">
+              <div
+                class="absolute -inset-0.5 bg-gradient-to-r from-primary to-secondary opacity-20 blur-lg !rounded-lg"
+              ></div>
+              <img
+                src="https://public.readdy.ai/ai/img_res/e5f0d2960155f533a967f1fc0391035d.jpg"
+                alt="Cyber Security Expert"
+                class="relative w-full h-auto !rounded-lg object-cover z-10"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="city-skyline absolute bottom-0 left-0 w-full"></div>
+    </section>
+
+    <section class="py-16 relative">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-white mb-4 orbitron">
+            <span class="text-secondary">&gt;</span> Elite
+            <span class="text-primary">Services</span>
+          </h2>
+          <p class="text-gray-400 max-w-2xl mx-auto">
+            Comprehensive cybersecurity solutions to protect your digital assets
+            and infrastructure from sophisticated threats and vulnerabilities.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div class="terminal p-6 !rounded-lg glitch-hover">
+            <div
+              class="w-16 h-16 flex items-center justify-center mb-4 text-primary"
+            >
+              <i class="ri-shield-keyhole-line ri-3x"></i>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-3">
+              Penetration Testing
+            </h3>
+            <p class="text-gray-400 mb-4">
+              Comprehensive security assessment to identify vulnerabilities in
+              your systems before malicious actors can exploit them.
+            </p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span
+                class="text-xs bg-primary/10 text-primary px-2 py-1 !rounded-full"
+                >Network</span
+              >
+              <span
+                class="text-xs bg-primary/10 text-primary px-2 py-1 !rounded-full"
+                >Web Apps</span
+              >
+              <span
+                class="text-xs bg-primary/10 text-primary px-2 py-1 !rounded-full"
+                >API</span
+              >
+              <span
+                class="text-xs bg-primary/10 text-primary px-2 py-1 !rounded-full"
+                >Cloud</span
+              >
+            </div>
+            <a
+              href="#"
+              class="inline-flex items-center text-secondary hover:text-primary transition-colors"
+            >
+              Learn more <i class="ri-arrow-right-line ml-2"></i>
+            </a>
+          </div>
+
+          <div class="terminal p-6 !rounded-lg glitch-hover">
+            <div
+              class="w-16 h-16 flex items-center justify-center mb-4 text-primary"
+            >
+              <i class="ri-spy-line ri-3x"></i>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-3">
+              Threat Intelligence
+            </h3>
+            <p class="text-gray-400 mb-4">
+              Proactive monitoring and analysis of potential threats targeting
+              your industry and specific digital assets.
+            </p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span
+                class="text-xs bg-primary/10 text-primary px-2 py-1 !rounded-full"
+                >Dark Web</span
+              >
+              <span
+                class="text-xs bg-primary/10 text-primary px-2 py-1 !rounded-full"
+                >Monitoring</span
+              >
+              <span
+                class="text-xs bg-primary/10 text-primary px-2 py-1 !rounded-full"
+                >Analysis</span
+              >
+            </div>
+            <a
+              href="#"
+              class="inline-flex items-center text-secondary hover:text-primary transition-colors"
+            >
+              Learn more <i class="ri-arrow-right-line ml-2"></i>
+            </a>
+          </div>
+
+          <div class="terminal p-6 !rounded-lg glitch-hover">
+            <div
+              class="w-16 h-16 flex items-center justify-center mb-4 text-primary"
+            >
+              <i class="ri-code-box-line ri-3x"></i>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-3">
+              Secure Code Review
+            </h3>
+            <p class="text-gray-400 mb-4">
+              Detailed analysis of application source code to identify security
+              flaws and implement best practices.
+            </p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span
+                class="text-xs bg-primary/10 text-primary px-2 py-1 !rounded-full"
+                >Static Analysis</span
+              >
+              <span
+                class="text-xs bg-primary/10 text-primary px-2 py-1 !rounded-full"
+                >SAST</span
+              >
+              <span
+                class="text-xs bg-primary/10 text-primary px-2 py-1 !rounded-full"
+                >DAST</span
+              >
+            </div>
+            <a
+              href="#"
+              class="inline-flex items-center text-secondary hover:text-primary transition-colors"
+            >
+              Learn more <i class="ri-arrow-right-line ml-2"></i>
+            </a>
+          </div>
+
+          <div class="terminal p-6 !rounded-lg glitch-hover">
+            <div
+              class="w-16 h-16 flex items-center justify-center mb-4 text-primary"
+            >
+              <i class="ri-fingerprint-line ri-3x"></i>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-3">Digital Forensics</h3>
+            <p class="text-gray-400 mb-4">
+              Investigation of security incidents to determine the extent of
+              breaches and recover critical evidence.
+            </p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span
+                class="text-xs bg-primary/10 text-primary px-2 py-1 !rounded-full"
+                >Incident Response</span
+              >
+              <span
+                class="text-xs bg-primary/10 text-primary px-2 py-1 !rounded-full"
+                >Evidence</span
+              >
+              <span
+                class="text-xs bg-primary/10 text-primary px-2 py-1 !rounded-full"
+                >Analysis</span
+              >
+            </div>
+            <a
+              href="#"
+              class="inline-flex items-center text-secondary hover:text-primary transition-colors"
+            >
+              Learn more <i class="ri-arrow-right-line ml-2"></i>
+            </a>
+          </div>
+
+          <div class="terminal p-6 !rounded-lg glitch-hover">
+            <div
+              class="w-16 h-16 flex items-center justify-center mb-4 text-primary"
+            >
+              <i class="ri-user-follow-line ri-3x"></i>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-3">Security Training</h3>
+            <p class="text-gray-400 mb-4">
+              Customized training programs to educate your team on security best
+              practices and threat awareness.
+            </p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span
+                class="text-xs bg-primary/10 text-primary px-2 py-1 !rounded-full"
+                >Awareness</span
+              >
+              <span
+                class="text-xs bg-primary/10 text-primary px-2 py-1 !rounded-full"
+                >Phishing</span
+              >
+              <span
+                class="text-xs bg-primary/10 text-primary px-2 py-1 !rounded-full"
+                >Workshops</span
+              >
+            </div>
+            <a
+              href="#"
+              class="inline-flex items-center text-secondary hover:text-primary transition-colors"
+            >
+              Learn more <i class="ri-arrow-right-line ml-2"></i>
+            </a>
+          </div>
+
+          <div class="terminal p-6 !rounded-lg glitch-hover">
+            <div
+              class="w-16 h-16 flex items-center justify-center mb-4 text-primary"
+            >
+              <i class="ri-server-line ri-3x"></i>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-3">
+              Infrastructure Security
+            </h3>
+            <p class="text-gray-400 mb-4">
+              Comprehensive assessment and hardening of network infrastructure
+              against sophisticated attacks.
+            </p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span
+                class="text-xs bg-primary/10 text-primary px-2 py-1 !rounded-full"
+                >Firewall</span
+              >
+              <span
+                class="text-xs bg-primary/10 text-primary px-2 py-1 !rounded-full"
+                >IDS/IPS</span
+              >
+              <span
+                class="text-xs bg-primary/10 text-primary px-2 py-1 !rounded-full"
+                >VPN</span
+              >
+            </div>
+            <a
+              href="#"
+              class="inline-flex items-center text-secondary hover:text-primary transition-colors"
+            >
+              Learn more <i class="ri-arrow-right-line ml-2"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-16 bg-black/30 border-y border-primary/30 relative">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-white mb-4 orbitron">
+            <span class="text-secondary">&gt;</span> Featured
+            <span class="text-primary">Projects</span>
+          </h2>
+          <p class="text-gray-400 max-w-2xl mx-auto">
+            A selection of recent cybersecurity projects and successful
+            operations (with sensitive details redacted for client
+            confidentiality).
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div class="group relative overflow-hidden !rounded-lg">
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"
+            ></div>
+            <img
+              src="https://public.readdy.ai/ai/img_res/f614c5bc213dea6dfcb25b0b366f6eff.jpg"
+              alt="Financial Institution Security Audit"
+              class="w-full h-64 object-cover object-top transition-transform duration-500 group-hover:scale-110"
+            />
+            <div class="absolute bottom-0 left-0 right-0 p-6 z-20">
+              <h3 class="text-xl font-bold text-white mb-2">
+                Financial Institution Security Audit
+              </h3>
+              <p
+                class="text-gray-300 text-sm mb-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              >
+                Comprehensive security assessment for a major financial
+                institution, identifying and remediating critical
+                vulnerabilities.
+              </p>
+              <div class="flex flex-wrap gap-2">
+                <span
+                  class="text-xs bg-black/50 text-primary px-2 py-1 !rounded-full"
+                  >Banking</span
+                >
+                <span
+                  class="text-xs bg-black/50 text-primary px-2 py-1 !rounded-full"
+                  >PCI-DSS</span
+                >
+                <span
+                  class="text-xs bg-black/50 text-primary px-2 py-1 !rounded-full"
+                  >Compliance</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="group relative overflow-hidden !rounded-lg">
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"
+            ></div>
+            <img
+              src="https://public.readdy.ai/ai/img_res/b369bdae749d2858af21a2d987da2c7f.jpg"
+              alt="Healthcare Data Protection"
+              class="w-full h-64 object-cover object-top transition-transform duration-500 group-hover:scale-110"
+            />
+            <div class="absolute bottom-0 left-0 right-0 p-6 z-20">
+              <h3 class="text-xl font-bold text-white mb-2">
+                Healthcare Data Protection
+              </h3>
+              <p
+                class="text-gray-300 text-sm mb-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              >
+                Implementation of advanced security measures for a healthcare
+                provider, ensuring HIPAA compliance and patient data protection.
+              </p>
+              <div class="flex flex-wrap gap-2">
+                <span
+                  class="text-xs bg-black/50 text-primary px-2 py-1 !rounded-full"
+                  >Healthcare</span
+                >
+                <span
+                  class="text-xs bg-black/50 text-primary px-2 py-1 !rounded-full"
+                  >HIPAA</span
+                >
+                <span
+                  class="text-xs bg-black/50 text-primary px-2 py-1 !rounded-full"
+                  >Encryption</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="group relative overflow-hidden !rounded-lg">
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"
+            ></div>
+            <img
+              src="https://public.readdy.ai/ai/img_res/39aeafb174eb7942766e146c2d6aac5e.jpg"
+              alt="E-commerce Platform Security"
+              class="w-full h-64 object-cover object-top transition-transform duration-500 group-hover:scale-110"
+            />
+            <div class="absolute bottom-0 left-0 right-0 p-6 z-20">
+              <h3 class="text-xl font-bold text-white mb-2">
+                E-commerce Platform Security
+              </h3>
+              <p
+                class="text-gray-300 text-sm mb-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              >
+                Security hardening for a high-traffic e-commerce platform,
+                protecting customer data and payment processing systems.
+              </p>
+              <div class="flex flex-wrap gap-2">
+                <span
+                  class="text-xs bg-black/50 text-primary px-2 py-1 !rounded-full"
+                  >E-commerce</span
+                >
+                <span
+                  class="text-xs bg-black/50 text-primary px-2 py-1 !rounded-full"
+                  >Payment</span
+                >
+                <span
+                  class="text-xs bg-black/50 text-primary px-2 py-1 !rounded-full"
+                  >API Security</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center mt-10">
+          <button
+            class="cyber-button bg-transparent text-primary border border-primary/50 px-6 py-3 !rounded-button hover:bg-primary/10 transition-all whitespace-nowrap"
+          >
+            <span class="text-secondary">&gt;</span> View All Projects
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-16 relative">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-white mb-4 orbitron">
+            <span class="text-secondary">&gt;</span> Security
+            <span class="text-primary">Statistics</span>
+          </h2>
+          <p class="text-gray-400 max-w-2xl mx-auto">
+            Real-time metrics and historical data on security threats and
+            vulnerabilities encountered during recent operations.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div class="terminal p-6 !rounded-lg">
+            <h3 class="text-xl font-bold text-white mb-4">
+              Vulnerability Categories
+            </h3>
+            <div id="vulnerabilityChart" class="w-full h-80"></div>
+          </div>
+
+          <div class="terminal p-6 !rounded-lg">
+            <h3 class="text-xl font-bold text-white mb-4">
+              Threat Detection Timeline
+            </h3>
+            <div id="threatTimelineChart" class="w-full h-80"></div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
+          <div class="terminal p-6 !rounded-lg text-center">
+            <div
+              class="w-16 h-16 flex items-center justify-center mx-auto mb-4 text-primary"
+            >
+              <i class="ri-shield-check-line ri-3x"></i>
+            </div>
+            <h3 class="text-4xl font-bold text-primary mb-2">98.7%</h3>
+            <p class="text-gray-400">Success Rate</p>
+          </div>
+
+          <div class="terminal p-6 !rounded-lg text-center">
+            <div
+              class="w-16 h-16 flex items-center justify-center mx-auto mb-4 text-primary"
+            >
+              <i class="ri-bug-line ri-3x"></i>
+            </div>
+            <h3 class="text-4xl font-bold text-primary mb-2">1,247</h3>
+            <p class="text-gray-400">Vulnerabilities Fixed</p>
+          </div>
+
+          <div class="terminal p-6 !rounded-lg text-center">
+            <div
+              class="w-16 h-16 flex items-center justify-center mx-auto mb-4 text-primary"
+            >
+              <i class="ri-building-line ri-3x"></i>
+            </div>
+            <h3 class="text-4xl font-bold text-primary mb-2">87</h3>
+            <p class="text-gray-400">Enterprise Clients</p>
+          </div>
+
+          <div class="terminal p-6 !rounded-lg text-center">
+            <div
+              class="w-16 h-16 flex items-center justify-center mx-auto mb-4 text-primary"
+            >
+              <i class="ri-global-line ri-3x"></i>
+            </div>
+            <h3 class="text-4xl font-bold text-primary mb-2">23</h3>
+            <p class="text-gray-400">Countries Served</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-16 bg-black/30 border-y border-primary/30 relative">
+      <div class="container mx-auto px-6">
+        <div class="flex flex-col lg:flex-row items-center gap-12">
+          <div class="w-full lg:w-1/2">
+            <h2 class="text-3xl font-bold text-white mb-4 orbitron">
+              <span class="text-secondary">&gt;</span> Security
+              <span class="text-primary">Assessment</span>
+            </h2>
+            <p class="text-gray-400 mb-6">
+              Request a comprehensive security assessment for your organization.
+              Our team will analyze your current security posture and provide
+              actionable recommendations to strengthen your defenses against
+              evolving cyber threats.
+            </p>
+
+            <div class="terminal p-6 !rounded-lg">
+              <div
+                class="terminal-header flex items-center p-2 mb-4 !rounded-t-lg"
+              >
+                <div class="w-3 h-3 !rounded-full bg-red-500 mr-2"></div>
+                <div class="w-3 h-3 !rounded-full bg-yellow-500 mr-2"></div>
+                <div class="w-3 h-3 !rounded-full bg-green-500"></div>
+                <div class="ml-4 text-xs text-primary/70">
+                  assessment@cyberdefense:~
+                </div>
+              </div>
+
+              <form class="space-y-4">
+                <div>
+                  <label class="block text-gray-400 mb-2" for="name"
+                    >Full Name</label
+                  >
+                  <div class="relative">
+                    <span
+                      class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500"
+                    >
+                      <i class="ri-user-line"></i>
+                    </span>
+                    <input
+                      type="text"
+                      id="name"
+                      class="w-full bg-black/50 border border-primary/30 text-white py-3 pl-10 pr-4 !rounded-lg focus:border-primary focus:outline-none text-sm"
+                      placeholder="Enter your name"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block text-gray-400 mb-2" for="email"
+                    >Email Address</label
+                  >
+                  <div class="relative">
+                    <span
+                      class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500"
+                    >
+                      <i class="ri-mail-line"></i>
+                    </span>
+                    <input
+                      type="email"
+                      id="email"
+                      class="w-full bg-black/50 border border-primary/30 text-white py-3 pl-10 pr-4 !rounded-lg focus:border-primary focus:outline-none text-sm"
+                      placeholder="Enter your email"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block text-gray-400 mb-2" for="company"
+                    >Company</label
+                  >
+                  <div class="relative">
+                    <span
+                      class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500"
+                    >
+                      <i class="ri-building-line"></i>
+                    </span>
+                    <input
+                      type="text"
+                      id="company"
+                      class="w-full bg-black/50 border border-primary/30 text-white py-3 pl-10 pr-4 !rounded-lg focus:border-primary focus:outline-none text-sm"
+                      placeholder="Enter your company name"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block text-gray-400 mb-2"
+                    >Services Required</label
+                  >
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <div class="flex items-center">
+                      <input
+                        type="checkbox"
+                        id="service1"
+                        class="custom-checkbox mr-3"
+                      />
+                      <label for="service1" class="text-gray-300 text-sm"
+                        >Penetration Testing</label
+                      >
+                    </div>
+                    <div class="flex items-center">
+                      <input
+                        type="checkbox"
+                        id="service2"
+                        class="custom-checkbox mr-3"
+                      />
+                      <label for="service2" class="text-gray-300 text-sm"
+                        >Threat Intelligence</label
+                      >
+                    </div>
+                    <div class="flex items-center">
+                      <input
+                        type="checkbox"
+                        id="service3"
+                        class="custom-checkbox mr-3"
+                      />
+                      <label for="service3" class="text-gray-300 text-sm"
+                        >Security Training</label
+                      >
+                    </div>
+                    <div class="flex items-center">
+                      <input
+                        type="checkbox"
+                        id="service4"
+                        class="custom-checkbox mr-3"
+                      />
+                      <label for="service4" class="text-gray-300 text-sm"
+                        >Digital Forensics</label
+                      >
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block text-gray-400 mb-2" for="message"
+                    >Message</label
+                  >
+                  <textarea
+                    id="message"
+                    rows="4"
+                    class="w-full bg-black/50 border border-primary/30 text-white py-3 px-4 !rounded-lg focus:border-primary focus:outline-none text-sm"
+                    placeholder="Describe your security needs"
+                  ></textarea>
+                </div>
+
+                <div class="flex items-center">
+                  <label class="custom-switch mr-3">
+                    <input type="checkbox" checked />
+                    <span class="switch-slider"></span>
+                  </label>
+                  <span class="text-gray-300 text-sm"
+                    >I agree to the confidentiality terms</span
+                  >
+                </div>
+
+                <button
+                  type="submit"
+                  class="cyber-button bg-primary/10 text-primary border border-primary px-6 py-3 !rounded-button hover:bg-primary/20 transition-all w-full whitespace-nowrap"
+                >
+                  <span class="text-white">&gt;</span> Submit Security Request
+                </button>
+              </form>
+            </div>
+          </div>
+
+          <div class="w-full lg:w-1/2">
+            <div class="terminal p-6 !rounded-lg h-full">
+              <h3 class="text-xl font-bold text-white mb-6">
+                Threat Intelligence Map
+              </h3>
+              <div
+                class="relative w-full h-[400px] overflow-hidden !rounded-lg border border-primary/30"
+              >
+                <div
+                  style="
+                    background-image: url('https://public.readdy.ai/gen_page/map_placeholder_1280x720.png');
+                  "
+                  class="absolute inset-0 bg-center bg-cover"
+                ></div>
+                <div class="absolute inset-0 bg-black/30"></div>
+
+                <div
+                  class="absolute top-1/4 left-1/3 w-4 h-4 !rounded-full bg-primary animate-ping"
+                ></div>
+                <div
+                  class="absolute top-1/4 left-1/3 w-2 h-2 !rounded-full bg-primary"
+                ></div>
+
+                <div
+                  class="absolute top-1/2 left-2/3 w-4 h-4 !rounded-full bg-secondary animate-ping"
+                ></div>
+                <div
+                  class="absolute top-1/2 left-2/3 w-2 h-2 !rounded-full bg-secondary"
+                ></div>
+
+                <div
+                  class="absolute top-3/4 left-1/4 w-4 h-4 !rounded-full bg-red-500 animate-ping"
+                ></div>
+                <div
+                  class="absolute top-3/4 left-1/4 w-2 h-2 !rounded-full bg-red-500"
+                ></div>
+
+                <div
+                  class="absolute bottom-1/4 right-1/4 w-4 h-4 !rounded-full bg-yellow-500 animate-ping"
+                ></div>
+                <div
+                  class="absolute bottom-1/4 right-1/4 w-2 h-2 !rounded-full bg-yellow-500"
+                ></div>
+
+                <div
+                  class="absolute top-10 right-10 p-3 bg-black/80 !rounded-lg border border-primary/30"
+                >
+                  <div class="text-xs text-gray-400 mb-2">
+                    Live Threat Detection
+                  </div>
+                  <div class="flex items-center mb-1">
+                    <div class="w-2 h-2 !rounded-full bg-primary mr-2"></div>
+                    <span class="text-xs text-white">DDoS Attacks</span>
+                  </div>
+                  <div class="flex items-center mb-1">
+                    <div class="w-2 h-2 !rounded-full bg-secondary mr-2"></div>
+                    <span class="text-xs text-white">Ransomware</span>
+                  </div>
+                  <div class="flex items-center mb-1">
+                    <div class="w-2 h-2 !rounded-full bg-red-500 mr-2"></div>
+                    <span class="text-xs text-white">Phishing</span>
+                  </div>
+                  <div class="flex items-center">
+                    <div class="w-2 h-2 !rounded-full bg-yellow-500 mr-2"></div>
+                    <span class="text-xs text-white">Data Breach</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-6">
+                <h4 class="text-lg font-bold text-white mb-3">
+                  Recent Threat Alerts
+                </h4>
+                <div class="space-y-3">
+                  <div
+                    class="flex items-start p-3 bg-black/50 !rounded-lg border border-red-500/30"
+                  >
+                    <div
+                      class="w-8 h-8 flex items-center justify-center mr-3 text-red-500"
+                    >
+                      <i class="ri-error-warning-line ri-lg"></i>
+                    </div>
+                    <div>
+                      <h5 class="text-sm font-bold text-white">
+                        Critical Ransomware Variant Detected
+                      </h5>
+                      <p class="text-xs text-gray-400">
+                        New strain targeting financial institutions in
+                        Asia-Pacific region
+                      </p>
+                      <p class="text-xs text-gray-500 mt-1">
+                        April 5, 2025 - 14:23 UTC
+                      </p>
+                    </div>
+                  </div>
+
+                  <div
+                    class="flex items-start p-3 bg-black/50 !rounded-lg border border-yellow-500/30"
+                  >
+                    <div
+                      class="w-8 h-8 flex items-center justify-center mr-3 text-yellow-500"
+                    >
+                      <i class="ri-alert-line ri-lg"></i>
+                    </div>
+                    <div>
+                      <h5 class="text-sm font-bold text-white">
+                        Supply Chain Vulnerability
+                      </h5>
+                      <p class="text-xs text-gray-400">
+                        Multiple zero-day exploits discovered in popular CI/CD
+                        pipeline tools
+                      </p>
+                      <p class="text-xs text-gray-500 mt-1">
+                        April 4, 2025 - 09:17 UTC
+                      </p>
+                    </div>
+                  </div>
+
+                  <div
+                    class="flex items-start p-3 bg-black/50 !rounded-lg border border-primary/30"
+                  >
+                    <div
+                      class="w-8 h-8 flex items-center justify-center mr-3 text-primary"
+                    >
+                      <i class="ri-information-line ri-lg"></i>
+                    </div>
+                    <div>
+                      <h5 class="text-sm font-bold text-white">
+                        Security Advisory Update
+                      </h5>
+                      <p class="text-xs text-gray-400">
+                        Critical patches released for major cloud service
+                        providers
+                      </p>
+                      <p class="text-xs text-gray-500 mt-1">
+                        April 3, 2025 - 16:45 UTC
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-16 relative">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-white mb-4 orbitron">
+            <span class="text-secondary">&gt;</span> Client
+            <span class="text-primary">Testimonials</span>
+          </h2>
+          <p class="text-gray-400 max-w-2xl mx-auto">
+            What our clients say about our cybersecurity services and expertise
+            (names and specific details redacted for confidentiality).
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div class="terminal p-6 !rounded-lg">
+            <div class="flex items-center mb-4">
+              <div
+                class="w-12 h-12 flex items-center justify-center !rounded-full bg-primary/10 text-primary mr-4"
+              >
+                <i class="ri-user-line ri-lg"></i>
+              </div>
+              <div>
+                <h4 class="text-white font-bold">CTO</h4>
+                <p class="text-gray-400 text-sm">Financial Services Company</p>
+              </div>
+            </div>
+            <p class="text-gray-300 mb-4">
+              "Their penetration testing uncovered critical vulnerabilities that
+              our internal team missed. The detailed remediation plan helped us
+              strengthen our security posture significantly."
+            </p>
+            <div class="flex text-primary">
+              <i class="ri-star-fill"></i>
+              <i class="ri-star-fill"></i>
+              <i class="ri-star-fill"></i>
+              <i class="ri-star-fill"></i>
+              <i class="ri-star-fill"></i>
+            </div>
+          </div>
+
+          <div class="terminal p-6 !rounded-lg">
+            <div class="flex items-center mb-4">
+              <div
+                class="w-12 h-12 flex items-center justify-center !rounded-full bg-primary/10 text-primary mr-4"
+              >
+                <i class="ri-user-line ri-lg"></i>
+              </div>
+              <div>
+                <h4 class="text-white font-bold">CISO</h4>
+                <p class="text-gray-400 text-sm">Healthcare Provider</p>
+              </div>
+            </div>
+            <p class="text-gray-300 mb-4">
+              "The security training program they developed for our staff was
+              exceptional. We've seen a 78% reduction in successful phishing
+              attempts since implementation."
+            </p>
+            <div class="flex text-primary">
+              <i class="ri-star-fill"></i>
+              <i class="ri-star-fill"></i>
+              <i class="ri-star-fill"></i>
+              <i class="ri-star-fill"></i>
+              <i class="ri-star-half-fill"></i>
+            </div>
+          </div>
+
+          <div class="terminal p-6 !rounded-lg">
+            <div class="flex items-center mb-4">
+              <div
+                class="w-12 h-12 flex items-center justify-center !rounded-full bg-primary/10 text-primary mr-4"
+              >
+                <i class="ri-user-line ri-lg"></i>
+              </div>
+              <div>
+                <h4 class="text-white font-bold">CEO</h4>
+                <p class="text-gray-400 text-sm">E-commerce Platform</p>
+              </div>
+            </div>
+            <p class="text-gray-300 mb-4">
+              "Their incident response team was invaluable when we experienced a
+              breach attempt. Their quick action prevented what could have been
+              a devastating data leak."
+            </p>
+            <div class="flex text-primary">
+              <i class="ri-star-fill"></i>
+              <i class="ri-star-fill"></i>
+              <i class="ri-star-fill"></i>
+              <i class="ri-star-fill"></i>
+              <i class="ri-star-fill"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-16 bg-black/30 border-y border-primary/30 relative">
+      <div class="container mx-auto px-6">
+        <div class="flex flex-col md:flex-row items-center justify-between">
+          <div class="mb-8 md:mb-0 md:mr-8">
+            <h2 class="text-3xl font-bold text-white mb-4 orbitron">
+              <span class="text-secondary">&gt;</span> Stay
+              <span class="text-primary">Protected</span>
+            </h2>
+            <p class="text-gray-400 max-w-xl">
+              Subscribe to our security bulletin for the latest threat
+              intelligence, vulnerability alerts, and cybersecurity best
+              practices.
+            </p>
+          </div>
+
+          <div class="w-full md:w-auto">
+            <div class="flex flex-col sm:flex-row">
+              <input
+                type="email"
+                class="w-full sm:w-auto bg-black/50 border border-primary/30 text-white py-3 px-4 !rounded-l-lg focus:border-primary focus:outline-none mb-3 sm:mb-0"
+                placeholder="Enter your email"
+              />
+              <button
+                class="cyber-button bg-primary/10 text-primary border border-primary px-6 py-3 !rounded-r-button hover:bg-primary/20 transition-all whitespace-nowrap"
+              >
+                <span class="text-white">&gt;</span> Subscribe
+              </button>
+            </div>
+            <p class="text-gray-500 text-xs mt-2">
+              We respect your privacy. Unsubscribe at any time.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="py-12 bg-black/50 relative">
+      <div class="container mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+          <div>
+            <div class="flex items-center mb-4">
+              <div class="w-10 h-10 flex items-center justify-center mr-3">
+                <i class="ri-user-3-fill text-primary ri-2x"></i>
+              </div>
+              <h1 class="font-['Pacifico'] text-primary text-2xl">GR Chetan</h1>
+            </div>
+            <p class="text-gray-400 mb-4">
+              Elite cybersecurity services for businesses and organizations
+              worldwide. Protecting digital assets from sophisticated threats
+              since 2015.
+            </p>
+            <div class="flex space-x-4">
+              <a
+                href="#"
+                class="w-8 h-8 flex items-center justify-center !rounded-full bg-black/50 text-primary hover:bg-primary/10 transition-colors"
+              >
+                <i class="ri-twitter-x-line"></i>
+              </a>
+              <a
+                href="#"
+                class="w-8 h-8 flex items-center justify-center !rounded-full bg-black/50 text-primary hover:bg-primary/10 transition-colors"
+              >
+                <i class="ri-linkedin-line"></i>
+              </a>
+              <a
+                href="#"
+                class="w-8 h-8 flex items-center justify-center !rounded-full bg-black/50 text-primary hover:bg-primary/10 transition-colors"
+              >
+                <i class="ri-github-line"></i>
+              </a>
+              <a
+                href="#"
+                class="w-8 h-8 flex items-center justify-center !rounded-full bg-black/50 text-primary hover:bg-primary/10 transition-colors"
+              >
+                <i class="ri-discord-line"></i>
+              </a>
+            </div>
+          </div>
+
+          <div>
+            <h3 class="text-white font-bold mb-4">Services</h3>
+            <ul class="space-y-2">
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-primary transition-colors flex items-center"
+                >
+                  <span class="text-primary mr-2">&gt;</span> Penetration
+                  Testing
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-primary transition-colors flex items-center"
+                >
+                  <span class="text-primary mr-2">&gt;</span> Threat
+                  Intelligence
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-primary transition-colors flex items-center"
+                >
+                  <span class="text-primary mr-2">&gt;</span> Secure Code Review
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-primary transition-colors flex items-center"
+                >
+                  <span class="text-primary mr-2">&gt;</span> Digital Forensics
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-primary transition-colors flex items-center"
+                >
+                  <span class="text-primary mr-2">&gt;</span> Security Training
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="text-white font-bold mb-4">Resources</h3>
+            <ul class="space-y-2">
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-primary transition-colors flex items-center"
+                >
+                  <span class="text-primary mr-2">&gt;</span> Security Blog
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-primary transition-colors flex items-center"
+                >
+                  <span class="text-primary mr-2">&gt;</span> Threat Reports
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-primary transition-colors flex items-center"
+                >
+                  <span class="text-primary mr-2">&gt;</span> Whitepapers
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-primary transition-colors flex items-center"
+                >
+                  <span class="text-primary mr-2">&gt;</span> Security Tools
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-primary transition-colors flex items-center"
+                >
+                  <span class="text-primary mr-2">&gt;</span> FAQ
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="text-white font-bold mb-4">Contact</h3>
+            <ul class="space-y-2">
+              <li class="flex items-start">
+                <div
+                  class="w-5 h-5 flex items-center justify-center text-primary mr-2 mt-0.5"
+                >
+                  <i class="ri-mail-line"></i>
+                </div>
+                <span class="text-gray-400"
+                  >chetanprajapat.contant@gmail.com</span
+                >
+              </li>
+              <li class="flex items-start">
+                <div
+                  class="w-5 h-5 flex items-center justify-center text-primary mr-2 mt-0.5"
+                >
+                  <i class="ri-phone-line"></i>
+                </div>
+                <span class="text-gray-400">+91 9179878521</span>
+              </li>
+              <li class="flex items-start">
+                <div
+                  class="w-5 h-5 flex items-center justify-center text-primary mr-2 mt-0.5"
+                >
+                  <i class="ri-map-pin-line"></i>
+                </div>
+                <span class="text-gray-400"> Indore Phase 2 457661 </span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div
+          class="border-t border-primary/30 pt-8 mt-8 flex flex-col md:flex-row justify-between items-center"
+        >
+          <p class="text-gray-500 text-sm mb-4 md:mb-0">
+            &copy; 2025 CyberDefense. All rights reserved.
+          </p>
+          <div class="flex space-x-4 text-gray-500 text-sm">
+            <a href="#" class="hover:text-primary transition-colors"
+              >Privacy Policy</a
+            >
+            <a href="#" class="hover:text-primary transition-colors"
+              >Terms of Service</a
+            >
+            <a href="#" class="hover:text-primary transition-colors"
+              >Cookie Policy</a
+            >
+          </div>
+        </div>
+
+        <div class="text-center mt-8">
+          <div
+            class="inline-block px-4 py-2 bg-black/50 !rounded-lg border border-primary/20"
+          >
+            <div class="flex items-center text-xs text-gray-500">
+              <span
+                class="w-2 h-2 !rounded-full bg-primary animate-pulse mr-2"
+              ></span>
+              System Status: Online | Last Updated: April 6, 2025
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js"></script>
+    <script>
+      // Matrix rain effect
+      const canvas = document.getElementById("matrix");
+      const ctx = canvas.getContext("2d");
+
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      const characters =
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789$+-*/=%\"'#&_(),.;:?!\\|{}<>[]^~";
+      const fontSize = 14;
+      const columns = canvas.width / fontSize;
+
+      const drops = [];
+      for (let i = 0; i < columns; i++) {
+        drops[i] = Math.floor((Math.random() * canvas.height) / fontSize);
+      }
+
+      function drawMatrix() {
+        ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        ctx.fillStyle = "#00FF41";
+        ctx.font = `${fontSize}px monospace`;
+
+        for (let i = 0; i < drops.length; i++) {
+          const text = characters.charAt(
+            Math.floor(Math.random() * characters.length)
+          );
+          ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+          if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+            drops[i] = 0;
+          }
+
+          drops[i]++;
+        }
+      }
+
+      setInterval(drawMatrix, 50);
+
+      // Current date and time
+      function updateDateTime() {
+        const now = new Date();
+        const dateElement = document.getElementById("current-date");
+        const timeElement = document.getElementById("current-time");
+
+        const date = now.toISOString().split("T")[0];
+        const time = now.toTimeString().split(" ")[0];
+
+        if (dateElement) dateElement.textContent = date;
+        if (timeElement) timeElement.textContent = time;
+      }
+
+      updateDateTime();
+      setInterval(updateDateTime, 1000);
+
+      // Charts
+      const vulnerabilityChart = echarts.init(
+        document.getElementById("vulnerabilityChart")
+      );
+      const threatTimelineChart = echarts.init(
+        document.getElementById("threatTimelineChart")
+      );
+
+      const vulnerabilityOption = {
+        animation: false,
+        tooltip: {
+          trigger: "item",
+          backgroundColor: "rgba(255, 255, 255, 0.8)",
+          textStyle: {
+            color: "#1f2937",
+          },
+        },
+        series: [
+          {
+            name: "Vulnerability Categories",
+            type: "pie",
+            radius: ["40%", "70%"],
+            itemStyle: {
+              borderRadius: 8,
+            },
+            label: {
+              color: "#e0e0e0",
+            },
+            data: [
+              {
+                value: 35,
+                name: "Injection",
+                itemStyle: { color: "rgba(87, 181, 231, 1)" },
+              },
+              {
+                value: 25,
+                name: "Authentication",
+                itemStyle: { color: "rgba(141, 211, 199, 1)" },
+              },
+              {
+                value: 20,
+                name: "XSS",
+                itemStyle: { color: "rgba(251, 191, 114, 1)" },
+              },
+              {
+                value: 15,
+                name: "CSRF",
+                itemStyle: { color: "rgba(252, 141, 98, 1)" },
+              },
+              {
+                value: 5,
+                name: "Other",
+                itemStyle: { color: "rgba(140, 140, 140, 1)" },
+              },
+            ],
+            emphasis: {
+              itemStyle: {
+                shadowBlur: 10,
+                shadowOffsetX: 0,
+                shadowColor: "rgba(0, 0, 0, 0.5)",
+              },
+            },
+          },
+        ],
+      };
+
+      const threatTimelineOption = {
+        animation: false,
+        grid: {
+          top: 10,
+          right: 10,
+          bottom: 30,
+          left: 50,
+        },
+        tooltip: {
+          trigger: "axis",
+          backgroundColor: "rgba(255, 255, 255, 0.8)",
+          textStyle: {
+            color: "#1f2937",
+          },
+        },
+        xAxis: {
+          type: "category",
+          data: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+          axisLine: {
+            lineStyle: {
+              color: "#e0e0e0",
+            },
+          },
+          axisLabel: {
+            color: "#e0e0e0",
+          },
+        },
+        yAxis: {
+          type: "value",
+          axisLine: {
+            lineStyle: {
+              color: "#e0e0e0",
+            },
+          },
+          axisLabel: {
+            color: "#e0e0e0",
+          },
+          splitLine: {
+            lineStyle: {
+              color: "rgba(255, 255, 255, 0.1)",
+            },
+          },
+        },
+        series: [
+          {
+            name: "Ransomware",
+            type: "line",
+            smooth: true,
+            data: [140, 132, 141, 154, 162, 178],
+            lineStyle: {
+              color: "rgba(87, 181, 231, 1)",
+            },
+            itemStyle: {
+              color: "rgba(87, 181, 231, 1)",
+            },
+            areaStyle: {
+              color: {
+                type: "linear",
+                x: 0,
+                y: 0,
+                x2: 0,
+                y2: 1,
+                colorStops: [
+                  { offset: 0, color: "rgba(87, 181, 231, 0.2)" },
+                  { offset: 1, color: "rgba(87, 181, 231, 0.0)" },
+                ],
+              },
+            },
+            showSymbol: false,
+          },
+          {
+            name: "Phishing",
+            type: "line",
+            smooth: true,
+            data: [120, 182, 191, 234, 290, 330],
+            lineStyle: {
+              color: "rgba(141, 211, 199, 1)",
+            },
+            itemStyle: {
+              color: "rgba(141, 211, 199, 1)",
+            },
+            areaStyle: {
+              color: {
+                type: "linear",
+                x: 0,
+                y: 0,
+                x2: 0,
+                y2: 1,
+                colorStops: [
+                  { offset: 0, color: "rgba(141, 211, 199, 0.2)" },
+                  { offset: 1, color: "rgba(141, 211, 199, 0.0)" },
+                ],
+              },
+            },
+            showSymbol: false,
+          },
+          {
+            name: "DDoS",
+            type: "line",
+            smooth: true,
+            data: [220, 182, 125, 145, 122, 168],
+            lineStyle: {
+              color: "rgba(251, 191, 114, 1)",
+            },
+            itemStyle: {
+              color: "rgba(251, 191, 114, 1)",
+            },
+            areaStyle: {
+              color: {
+                type: "linear",
+                x: 0,
+                y: 0,
+                x2: 0,
+                y2: 1,
+                colorStops: [
+                  { offset: 0, color: "rgba(251, 191, 114, 0.2)" },
+                  { offset: 1, color: "rgba(251, 191, 114, 0.0)" },
+                ],
+              },
+            },
+            showSymbol: false,
+          },
+        ],
+      };
+
+      vulnerabilityChart.setOption(vulnerabilityOption);
+      threatTimelineChart.setOption(threatTimelineOption);
+
+      window.addEventListener("resize", function () {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        vulnerabilityChart.resize();
+        threatTimelineChart.resize();
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>About Me — Sketch Style</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Shadows+Into+Light&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --paper: #ffffff;
+        --pencil: #2f2f2f; /* pencil grey */
+        --frame: #333;
+        --highlight-yellow: rgba(252, 235, 165, 0.9);
+        --highlight-pink: rgba(255, 210, 220, 0.9);
+        --highlight-blue: rgba(196, 224, 255, 0.9);
+        --smudge: rgba(0, 0, 0, 0.06);
+        --max-width: 900px;
+      }
+
+      /* page */
+      html,
+      body {
+        height: 100%;
+      }
+      body {
+        margin: 0;
+        background: var(--paper);
+        font-family: "Patrick Hand", "Shadows Into Light", system-ui,
+          -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+        color: var(--pencil);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        padding: 40px 20px;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+      }
+
+      /* sketchbook card */
+      .sketch-wrap {
+        width: 100%;
+        max-width: var(--max-width);
+        background: transparent;
+        position: relative;
+        box-sizing: border-box;
+      }
+
+      /* header */
+      .title {
+        font-size: 48px;
+        letter-spacing: 2px;
+        margin: 0 0 14px 6px;
+        position: relative;
+        display: inline-block;
+      }
+      .title:after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -6px;
+        height: 8px;
+        background: linear-gradient(90deg, var(--highlight-pink), transparent);
+        transform: skewX(-6deg);
+        z-index: -1;
+        opacity: 0.95;
+      }
+
+      /* main layout */
+      .about-row {
+        display: grid;
+        grid-template-columns: 320px 1fr;
+        gap: 28px;
+        align-items: start;
+      }
+
+      /* left portrait frame - hand drawn box */
+      .portrait-frame {
+        width: 320px;
+        height: 420px;
+        padding: 18px;
+        box-sizing: border-box;
+        background: linear-gradient(180deg, rgba(0, 0, 0, 0.02), transparent);
+        border: 2px solid transparent;
+        position: relative;
+        filter: grayscale(0.03);
+      }
+
+      /* hand-drawn border effect using multiple outlines */
+      .portrait-frame:before,
+      .portrait-frame:after {
+        content: "";
+        position: absolute;
+        pointer-events: none;
+        left: 6px;
+        right: 6px;
+        top: 6px;
+        bottom: 6px;
+        border: 2px solid transparent;
+      }
+      .portrait-frame {
+        outline: 2px dotted rgba(0, 0, 0, 0.06);
+      }
+
+      .hand-border {
+        position: absolute;
+        inset: 6px;
+        border-radius: 2px;
+        pointer-events: none;
+        border: 2px solid rgba(0, 0, 0, 0.8);
+        transform: rotate(-0.6deg) translateX(-2px);
+        mix-blend-mode: multiply;
+        box-shadow: 0 6px 0 -4px var(--smudge) inset;
+      }
+      .hand-border.secondary {
+        border: 2px solid rgba(0, 0, 0, 0.6);
+        transform: rotate(0.8deg) translateY(3px);
+        opacity: 0.7;
+      }
+
+      /* portrait (SVG silhouette) */
+      .portrait {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        z-index: 1;
+      }
+      .portrait svg {
+        width: 80%;
+        height: auto;
+        display: block;
+        filter: drop-shadow(0 3px 0 rgba(0, 0, 0, 0.04));
+      }
+
+      /* cross-hatch texture overlay */
+      .hatch {
+        position: absolute;
+        inset: 28px;
+        border-radius: 0;
+        pointer-events: none;
+        opacity: 0.14;
+        background-image: linear-gradient(
+            135deg,
+            rgba(0, 0, 0, 0.03) 1px,
+            transparent 1px
+          ),
+          linear-gradient(45deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+        background-size: 8px 8px, 8px 8px;
+        mix-blend-mode: multiply;
+      }
+
+      /* right column */
+      .bio-col {
+        padding: 12px 6px 6px 6px;
+        position: relative;
+      }
+
+      .card {
+        border: 2px solid rgba(0, 0, 0, 0.8);
+        padding: 14px 16px;
+        margin-bottom: 18px;
+        max-width: 640px;
+        background: transparent;
+        position: relative;
+        transform: rotate(-0.5deg);
+        box-shadow: 6px 10px 0 -8px var(--smudge);
+      }
+      .card:nth-child(2) {
+        transform: rotate(0.6deg);
+      }
+
+      .heading {
+        font-size: 20px;
+        margin: 0 0 8px 0;
+        display: inline-block;
+        position: relative;
+        padding-bottom: 2px;
+      }
+      .heading .mark {
+        display: inline-block;
+        padding: 2px 8px;
+        border-radius: 2px;
+        margin-left: 8px;
+        font-size: 14px;
+      }
+
+      /* highlight types */
+      .mark.yellow {
+        background: var(--highlight-yellow);
+      }
+      .mark.pink {
+        background: var(--highlight-pink);
+      }
+      .mark.blue {
+        background: var(--highlight-blue);
+      }
+
+      .text-small {
+        font-size: 16px;
+        line-height: 1.5;
+        margin: 0;
+      }
+
+      /* little doodles */
+      .doodle {
+        position: absolute;
+        opacity: 0.9;
+        stroke: var(--pencil);
+        stroke-width: 2;
+        fill: none;
+      }
+      .doodle.star {
+        left: 18px;
+        top: 360px;
+        width: 26px;
+        height: 26px;
+      }
+      .doodle.arrow {
+        right: 24px;
+        top: 140px;
+        width: 40px;
+        height: 40px;
+      }
+      .doodle.zig {
+        left: 260px;
+        top: 250px;
+        width: 36px;
+        height: 24px;
+      }
+
+      /* tiny scribble notes */
+      .tiny-note {
+        font-size: 12px;
+        color: rgba(0, 0, 0, 0.6);
+        position: absolute;
+      }
+      .tiny-note.one {
+        left: 14px;
+        top: 8px;
+      }
+      .tiny-note.two {
+        right: 10px;
+        bottom: 10px;
+      }
+
+      /* footer smudge */
+      .page-smudge {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -18px;
+        height: 28px;
+        background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.03));
+        filter: blur(2px);
+      }
+
+      /* responsive */
+      @media (max-width: 800px) {
+        .about-row {
+          grid-template-columns: 1fr;
+        }
+        .portrait-frame {
+          width: 100%;
+          height: 320px;
+          margin-bottom: 18px;
+        }
+      }
+
+      /* hand-lettered tweaks: jitter effect lines (subtle) */
+      .jitter {
+        display: inline-block;
+        transform-origin: left center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="sketch-wrap" role="main">
+      <h1 class="title jitter">ABOUT ME</h1>
+
+      <div class="about-row">
+        <div class="portrait-frame" aria-hidden="true">
+          <div class="hand-border"></div>
+          <div class="hand-border secondary"></div>
+
+          <div class="portrait">
+            <!-- simple hand-drawn silhouette SVG -->
+            <svg
+              viewBox="0 0 200 260"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+            >
+              <defs>
+                <filter
+                  id="pencil"
+                  x="-50%"
+                  y="-50%"
+                  width="200%"
+                  height="200%"
+                >
+                  <feTurbulence
+                    baseFrequency="0.8"
+                    numOctaves="1"
+                    result="noise"
+                  />
+                  <feDiffuseLighting
+                    in="noise"
+                    lighting-color="#000"
+                    surfaceScale="0.5"
+                  >
+                    <feDistantLight azimuth="45" elevation="55" />
+                  </feDiffuseLighting>
+                </filter>
+              </defs>
+
+              <g transform="translate(10,10)">
+                <path
+                  d="M60 30 C40 38,30 70,36 100 C28 140,40 170,55 190 C44 202,30 218,28 234 C62 238,125 238,148 232 C147 210,132 200,122 194 C140 172,152 142,148 112 C160 86,140 52,100 44 C92 40,76 32,60 30 Z"
+                  fill="#2d2d2d"
+                  opacity="0.95"
+                  filter="url(#pencil)"
+                />
+                <!-- rough contour lines -->
+                <path
+                  d="M64 32 C45 40,34 72,38 102 C30 142,40 172,56 192"
+                  stroke="#111"
+                  stroke-width="2"
+                  fill="none"
+                  opacity="0.35"
+                />
+              </g>
+            </svg>
+          </div>
+
+          <div class="hatch" aria-hidden="true"></div>
+        </div>
+
+        <div class="bio-col">
+          <section class="card" aria-labelledby="name-title">
+            <h2 id="name-title" class="heading">
+              Name <span class="mark yellow">Chetan Prajapat</span>
+            </h2>
+            <p class="text-small">
+              Web developer &amp; full-stack tinkerer. I build minimal
+              interfaces with character — a little messy, mostly intentional.
+            </p>
+          </section>
+
+          <section class="card" aria-labelledby="bio-title">
+            <h3 id="bio-title" class="heading">
+              Bio <span class="mark pink">Quick</span>
+            </h3>
+            <p class="text-small">
+              I love hand-crafted UI, subtle animations, and building things
+              that feel personal — like a notebook page come to life.
+            </p>
+          </section>
+
+          <section class="card" aria-labelledby="hobby-title">
+            <h3 id="hobby-title" class="heading">
+              Hobbies <span class="mark blue">Bits</span>
+            </h3>
+            <p class="text-small">
+              Sketching, coffee, gaming, and exploring CSS tricks that look like
+              hand-drawn magic.
+            </p>
+          </section>
+
+          <!-- small doodles using inline svg -->
+          <svg class="doodle star" viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M12 2 L14 9 L21 9 L15.5 13 L17.5 20 L12 16 L6.5 20 L8.5 13 L3 9 L10 9 Z"
+              stroke="currentColor"
+              stroke-width="1.6"
+              fill="none"
+            />
+          </svg>
+
+          <svg class="doodle arrow" viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M3 12 L18 12"
+              stroke="currentColor"
+              stroke-width="1.6"
+              fill="none"
+              stroke-linecap="round"
+            />
+            <path
+              d="M13 7 L18 12 L13 17"
+              stroke="currentColor"
+              stroke-width="1.6"
+              fill="none"
+              stroke-linecap="round"
+            />
+          </svg>
+
+          <svg class="doodle zig" viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M2 6 L8 6 L6 12 L12 12 L10 18 L18 18"
+              stroke="currentColor"
+              stroke-width="1.6"
+              fill="none"
+              stroke-linejoin="round"
+            />
+          </svg>
+
+          <div class="tiny-note one">little scribbles — nothing serious</div>
+          <div class="tiny-note two">sketchbook | 2025</div>
+        </div>
+      </div>
+
+      <div class="page-smudge" aria-hidden="true"></div>
+    </div>
+  </body>
+</html>
