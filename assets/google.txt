@@ -1,0 +1,65 @@
+// ============================================================
+//  CHETAN PORTFOLIO — Google Sheets Apps Script
+//  Step-by-step setup niche diya gaya hai
+// ============================================================
+
+// STEP 1: Google Sheets open karo (sheets.google.com)
+//         Ek nayi sheet banao: "Portfolio Contacts" naam do
+//         Row 1 mein ye headers daalo:
+//         A1: Timestamp | B1: Name | C1: Email | D1: Message
+
+// STEP 2: Extensions > Apps Script click karo
+
+// STEP 3: Pura code yahan paste karo (default code delete karke)
+
+// STEP 4: Save karo (Ctrl+S), phir upar Deploy > New Deployment click karo
+//         - Type: Web App select karo
+//         - Execute as: Me
+//         - Who has access: Anyone
+//         - Deploy click karo
+//         - Web App URL copy karo
+
+// STEP 5: Wo URL apni portfolio HTML file mein
+//         GOOGLE_SHEET_URL variable mein paste karo
+
+// ============================================================
+
+const SHEET_NAME = "Portfolio Contacts"; // Sheet ka naam
+
+function doPost(e) {
+  try {
+    const ss = SpreadsheetApp.getActiveSpreadsheet();
+    const sheet = ss.getSheetByName(SHEET_NAME) || ss.getActiveSheet();
+    
+    const data = JSON.parse(e.postData.contents);
+    
+    // Agar header row nahi hai toh add karo
+    if (sheet.getLastRow() === 0) {
+      sheet.appendRow(["Timestamp", "Name", "Email", "Message"]);
+    }
+    
+    // Data row add karo
+    sheet.appendRow([
+      new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }),
+      data.name || "",
+      data.email || "",
+      data.message || ""
+    ]);
+    
+    return ContentService
+      .createTextOutput(JSON.stringify({ result: "success", message: "Data saved!" }))
+      .setMimeType(ContentService.MimeType.JSON);
+      
+  } catch (err) {
+    return ContentService
+      .createTextOutput(JSON.stringify({ result: "error", message: err.toString() }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
+// CORS ke liye GET request bhi handle karo
+function doGet(e) {
+  return ContentService
+    .createTextOutput(JSON.stringify({ result: "success", message: "API is running!" }))
+    .setMimeType(ContentService.MimeType.JSON);
+}
