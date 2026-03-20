@@ -1,5 +1,5 @@
 /* ══════════════════════════════════════
-   THEME — Lighter dark, readable light
+   THEME VARIABLES
 ══════════════════════════════════════ */
 [data-theme='dark'] {
   --bg: #111318;
@@ -10,34 +10,45 @@
   --white: #eef0f5;
   --gray: #9aa0b0;
   --gray2: #5c6370;
-  --nav-bg: rgba(17, 19, 24, 0.93);
+  --nav-bg: rgba(17, 19, 24, 0.95);
   --stroke: rgba(255, 255, 255, 0.04);
   --form-bg: #1a1d24;
-  --shadow: rgba(0, 0, 0, 0.5);
+  --shadow: rgba(0, 0, 0, 0.45);
 }
+
+/* ✅ FIXED LIGHT MODE — High contrast, clearly readable */
 [data-theme='light'] {
-  --bg: #f5f6fa;
-  --bg2: #eceef5;
-  --bg3: #e2e4ed;
-  --card: #ffffff;
-  --border: #d8dae6;
-  --white: #1a1d24;
-  --gray: #5a5f72;
-  --gray2: #9297a8;
-  --nav-bg: rgba(245, 246, 250, 0.93);
-  --stroke: rgba(0, 0, 0, 0.04);
-  --form-bg: #f0f1f8;
-  --shadow: rgba(0, 0, 0, 0.08);
+  --bg: #ffffff;
+  --bg2: #f4f5f9;
+  --bg3: #e8eaf2;
+  --card: #f8f9fc;
+  --border: #dde0ec;
+  --white: #111318; /* dark text on white */
+  --gray: #444858; /* readable body text */
+  --gray2: #8890a4;
+  --nav-bg: rgba(255, 255, 255, 0.96);
+  --stroke: rgba(0, 0, 0, 0.06);
+  --form-bg: #eef0f8;
+  --shadow: rgba(0, 0, 0, 0.1);
 }
+
 :root {
-  --lime: #b8ff00;
-  --lime2: #96d400;
-  --lime-dim: rgba(184, 255, 0, 0.12);
-  --lime-border: rgba(184, 255, 0, 0.25);
+  --lime: #7dc900; /* slightly deeper — readable on both themes */
+  --lime2: #64a800;
+  --lime-dim: rgba(125, 201, 0, 0.1);
+  --lime-border: rgba(125, 201, 0, 0.3);
   --font-d: 'Bebas Neue', sans-serif;
   --font-b: 'DM Sans', sans-serif;
   --r: 14px;
   --r-sm: 10px;
+}
+
+/* ── light mode overrides for lime accents ── */
+[data-theme='light'] {
+  --lime: #5a9400;
+  --lime2: #477800;
+  --lime-dim: rgba(90, 148, 0, 0.08);
+  --lime-border: rgba(90, 148, 0, 0.25);
 }
 
 *,
@@ -71,15 +82,12 @@ body {
   pointer-events: none;
   z-index: 9999;
   transform: translate(-50%, -50%);
-  transition:
-    transform 0.07s,
-    width 0.2s,
-    height 0.2s;
+  transition: transform 0.07s;
 }
 .cur-ring {
   width: 32px;
   height: 32px;
-  border: 1.5px solid rgba(184, 255, 0, 0.35);
+  border: 1.5px solid rgba(125, 201, 0, 0.4);
   border-radius: 50%;
   position: fixed;
   pointer-events: none;
@@ -92,7 +100,6 @@ body {
     height 0.18s;
 }
 
-/* ── Subtle noise ── */
 body::before {
   content: '';
   position: fixed;
@@ -100,7 +107,7 @@ body::before {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
   pointer-events: none;
   z-index: 1;
-  opacity: 0.5;
+  opacity: 0.4;
 }
 
 .container {
@@ -151,7 +158,6 @@ nav.scrolled {
   color: var(--lime);
 }
 
-/* Desktop links */
 .nav-links {
   display: flex;
   gap: 28px;
@@ -219,7 +225,7 @@ nav.scrolled {
 }
 [data-theme='light'] .t-knob {
   transform: translateX(14px);
-  background: var(--lime2);
+  background: var(--lime);
 }
 .t-label {
   font-size: 10px;
@@ -229,7 +235,7 @@ nav.scrolled {
   transition: color 0.3s;
 }
 [data-theme='light'] .t-label {
-  color: var(--lime2);
+  color: var(--lime);
 }
 
 .nav-cta {
@@ -237,7 +243,7 @@ nav.scrolled {
   font-weight: 600;
   padding: 8px 20px;
   background: var(--lime);
-  color: #000;
+  color: #fff;
   border: none;
   border-radius: 100px;
   text-decoration: none;
@@ -246,12 +252,15 @@ nav.scrolled {
     background 0.2s,
     transform 0.2s;
 }
+[data-theme='light'] .nav-cta {
+  color: #fff;
+}
 .nav-cta:hover {
   background: var(--lime2);
   transform: scale(1.04);
 }
 
-/* ── Hamburger ── */
+/* ── Hamburger Button ── */
 .hamburger {
   display: none;
   flex-direction: column;
@@ -262,7 +271,8 @@ nav.scrolled {
   padding: 10px;
   cursor: pointer;
   transition: border-color 0.2s;
-  z-index: 700;
+  position: relative;
+  z-index: 800; /* ✅ high z-index */
 }
 .hamburger:hover {
   border-color: var(--lime-border);
@@ -272,6 +282,7 @@ nav.scrolled {
   height: 2px;
   background: var(--white);
   border-radius: 2px;
+  display: block;
   transition:
     transform 0.3s,
     opacity 0.3s,
@@ -288,15 +299,12 @@ nav.scrolled {
   transform: translateY(-7px) rotate(-45deg);
 }
 
-/* ── Mobile Menu ── */
+/* ✅ FIXED MOBILE MENU — no overlap, proper layout */
 .mobile-menu {
   display: none;
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 550;
+  inset: 0;
+  z-index: 700; /* below hamburger (800), above nav (600) */
   background: var(--bg);
   flex-direction: column;
   align-items: center;
@@ -310,37 +318,55 @@ nav.scrolled {
   opacity: 1;
   pointer-events: all;
 }
+
+/* Close hint top-right */
+.mob-close-hint {
+  position: absolute;
+  top: 22px;
+  right: 24px;
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: var(--gray2);
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+/* Big nav links */
 .mob-links {
-  margin-top: 60px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
-  margin-bottom: 40px;
+  gap: 4px;
+  margin-bottom: 36px;
 }
 .mob-links a {
   font-family: var(--font-d);
-  font-size: clamp(36px, 8vw, 52px);
+  font-size: clamp(34px, 9vw, 54px);
   letter-spacing: 2px;
   color: var(--gray);
   text-decoration: none;
-  transition: color 0.2s;
-  padding: 8px 20px;
+  padding: 6px 24px;
+  transition:
+    color 0.2s,
+    transform 0.2s;
+  display: block;
 }
 .mob-links a:hover {
   color: var(--lime);
+  transform: translateX(6px);
 }
+
+/* Social icons bottom */
 .mob-footer {
   display: flex;
-  margin-top: 30px;
-  gap: 12px;
+  gap: 10px;
   flex-wrap: wrap;
   justify-content: center;
+  /* NO margin-top:200px — that was the bug ✅ */
 }
 .mob-social {
-  margin-top: 200px;
-  width: 44px;
-  height: 44px;
+  width: 42px;
+  height: 42px;
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: 10px;
@@ -356,15 +382,6 @@ nav.scrolled {
   background: var(--lime-dim);
   border-color: var(--lime-border);
   color: var(--lime);
-}
-.mob-close-hint {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  font-size: 11px;
-  letter-spacing: 1px;
-  color: var(--gray2);
-  text-transform: uppercase;
 }
 
 /* ══════════════════════════════════════
@@ -399,6 +416,7 @@ nav.scrolled {
   position: relative;
   z-index: 2;
 }
+
 .hero-top {
   display: flex;
   align-items: flex-end;
@@ -457,7 +475,7 @@ nav.scrolled {
   display: block;
 }
 
-/* Image */
+/* Profile Image */
 .hero-img-wrap {
   position: relative;
   flex-shrink: 0;
@@ -477,7 +495,7 @@ nav.scrolled {
   position: absolute;
   inset: -14px;
   border-radius: 30px;
-  background: radial-gradient(circle, rgba(184, 255, 0, 0.13), transparent 65%);
+  background: radial-gradient(circle, rgba(125, 201, 0, 0.12), transparent 65%);
   pointer-events: none;
   animation: gp 3s ease-in-out infinite alternate;
 }
@@ -517,9 +535,12 @@ nav.scrolled {
   border-radius: 100px;
   font-size: 11px;
   font-weight: 800;
-  color: #000;
+  color: #fff;
   white-space: nowrap;
-  box-shadow: 0 4px 18px rgba(184, 255, 0, 0.4);
+  box-shadow: 0 4px 18px rgba(125, 201, 0, 0.4);
+}
+[data-theme='light'] .img-badge {
+  color: #fff;
 }
 .img-fallback {
   width: 210px;
@@ -556,7 +577,7 @@ nav.scrolled {
 }
 .hero-desc strong {
   color: var(--white);
-  font-weight: 500;
+  font-weight: 600;
 }
 .hero-btns {
   display: flex;
@@ -566,7 +587,7 @@ nav.scrolled {
 .btn-fill {
   padding: 12px 26px;
   background: var(--lime);
-  color: #000;
+  color: #fff;
   font-size: 13px;
   font-weight: 700;
   border: none;
@@ -610,7 +631,7 @@ nav.scrolled {
 }
 
 /* ══════════════════════════════════════
-   SECTION HEADER
+   SECTIONS
 ══════════════════════════════════════ */
 .sec {
   padding: 80px 0;
@@ -641,7 +662,7 @@ nav.scrolled {
 }
 
 /* ══════════════════════════════════════
-   BENTO ABOUT
+   BENTO
 ══════════════════════════════════════ */
 .bento {
   display: grid;
@@ -673,7 +694,7 @@ nav.scrolled {
   border-radius: var(--r);
   background: radial-gradient(
     500px circle at var(--mx, 50%) var(--my, 50%),
-    rgba(184, 255, 0, 0.05),
+    rgba(125, 201, 0, 0.05),
     transparent 50%
   );
   pointer-events: none;
@@ -726,7 +747,7 @@ nav.scrolled {
 }
 .card-p strong {
   color: var(--white);
-  font-weight: 500;
+  font-weight: 600;
 }
 .card-p p {
   margin-bottom: 10px;
@@ -834,16 +855,16 @@ nav.scrolled {
   background: var(--lime);
   border-radius: 50%;
   flex-shrink: 0;
-  box-shadow: 0 0 0 3px rgba(184, 255, 0, 0.15);
+  box-shadow: 0 0 0 3px rgba(125, 201, 0, 0.2);
   animation: ap 2s infinite;
 }
 @keyframes ap {
   0%,
   100% {
-    box-shadow: 0 0 0 3px rgba(184, 255, 0, 0.15);
+    box-shadow: 0 0 0 3px rgba(125, 201, 0, 0.2);
   }
   50% {
-    box-shadow: 0 0 0 7px rgba(184, 255, 0, 0.04);
+    box-shadow: 0 0 0 7px rgba(125, 201, 0, 0.05);
   }
 }
 .avail-t {
@@ -1135,7 +1156,7 @@ nav.scrolled {
 }
 .f-input:focus,
 .f-ta:focus {
-  border-color: rgba(184, 255, 0, 0.45);
+  border-color: rgba(125, 201, 0, 0.45);
 }
 .f-ta {
   resize: none;
@@ -1164,7 +1185,7 @@ nav.scrolled {
   gap: 8px;
   padding: 12px 26px;
   background: var(--lime);
-  color: #000;
+  color: #fff;
   font-family: var(--font-b);
   font-size: 13px;
   font-weight: 700;
@@ -1185,8 +1206,8 @@ nav.scrolled {
 .spinner {
   width: 13px;
   height: 13px;
-  border: 2px solid rgba(0, 0, 0, 0.2);
-  border-top-color: #000;
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  border-top-color: #fff;
   border-radius: 50%;
   animation: sp 0.55s linear infinite;
   display: none;
@@ -1215,7 +1236,7 @@ nav.scrolled {
 }
 .toast.s {
   background: var(--lime);
-  color: #000;
+  color: #fff;
 }
 .toast.e {
   background: #ff4545;
@@ -1283,14 +1304,14 @@ footer {
   align-items: center;
   justify-content: center;
   font-size: 15px;
-  color: #000;
+  color: #fff;
   text-decoration: none;
   opacity: 0;
   pointer-events: none;
   transition:
     opacity 0.3s,
     transform 0.2s;
-  box-shadow: 0 4px 18px rgba(184, 255, 0, 0.35);
+  box-shadow: 0 4px 18px rgba(125, 201, 0, 0.4);
 }
 .top-btn.show {
   opacity: 1;

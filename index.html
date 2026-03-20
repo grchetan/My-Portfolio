@@ -519,7 +519,6 @@
               ></a>
             </div>
           </div>
-
           <div class="rv d2">
             <div class="form-card">
               <form class="contact-form" id="contact-form">
@@ -600,7 +599,7 @@
     ></a>
 
     <script>
-      // ══ Google Sheet URL ══
+      // ══ Google Sheet Web App URL ══
       const SHEET_URL =
         'https://script.google.com/macros/s/AKfycbyodVqcRiT05RqMau3p23NkBAXMIrTf0It7yDPqmbb_D4dAKP2rOSXQ4lFWlDWXz0Ot/exec';
 
@@ -621,7 +620,7 @@
         tLabel.textContent = n === 'dark' ? 'DARK' : 'LIGHT';
       });
 
-      // ── Hamburger ──
+      // ── Hamburger ── ✅ FIXED z-index & overlap
       const ham = document.getElementById('hamburger');
       const mob = document.getElementById('mob-menu');
       function closeMob() {
@@ -629,10 +628,21 @@
         mob.classList.remove('open');
         document.body.style.overflow = '';
       }
-      ham.addEventListener('click', () => {
+      ham.addEventListener('click', (e) => {
+        e.stopPropagation();
         const isOpen = mob.classList.toggle('open');
         ham.classList.toggle('open', isOpen);
         document.body.style.overflow = isOpen ? 'hidden' : '';
+      });
+      // Close on outside click
+      document.addEventListener('click', (e) => {
+        if (
+          mob.classList.contains('open') &&
+          !mob.contains(e.target) &&
+          !ham.contains(e.target)
+        ) {
+          closeMob();
+        }
       });
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') closeMob();
@@ -707,7 +717,7 @@
         setTimeout(() => t.classList.remove('show'), 3800);
       }
 
-      // ── Form → Google Sheet ──
+      // ── Form → Google Sheet ✅ FIXED message field ──
       document
         .getElementById('contact-form')
         .addEventListener('submit', async function (e) {
@@ -716,18 +726,26 @@
           const btnTxt = document.getElementById('btn-txt');
           const spin = document.getElementById('btn-spin');
 
+          // ✅ All 4 fields properly collected
           const payload = {
             name: document.getElementById('f-name').value.trim(),
             email: document.getElementById('f-email').value.trim(),
             subject: document.getElementById('f-subject').value.trim(),
-            message: document.getElementById('f-message').value.trim(), // ✅ message field fixed
+            message: document.getElementById('f-message').value.trim(),
           };
+
+          // Validation
+          if (!payload.name || !payload.email || !payload.message) {
+            toast('⚠️ Name, Email aur Message required hai!', 'e');
+            return;
+          }
 
           btn.disabled = true;
           btnTxt.textContent = 'Sending...';
           spin.style.display = 'block';
 
           try {
+            // ✅ no-cors mode — data save ho jaata hai silently
             await fetch(SHEET_URL, {
               method: 'POST',
               mode: 'no-cors',
@@ -737,7 +755,7 @@
             toast('✅ Message sent! Will reply soon.', 's');
             e.target.reset();
           } catch (err) {
-            toast('❌ Error! Email karo directly.', 'e');
+            toast('❌ Network error! Try email directly.', 'e');
           } finally {
             btn.disabled = false;
             btnTxt.textContent = 'Send Message →';
