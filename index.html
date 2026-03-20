@@ -563,6 +563,7 @@
                     required
                   ></textarea>
                 </div>
+
                 <div class="f-foot">
                   <span class="f-note"
                     ><i class="fa-solid fa-shield-check"></i> Saves to Google
@@ -736,7 +737,7 @@
 
           // Validation
           if (!payload.name || !payload.email || !payload.message) {
-            toast('⚠️ Name, Email aur Message required hai!', 'e');
+            toast('⚠️ Name, Email and Message required!', 'e');
             return;
           }
 
