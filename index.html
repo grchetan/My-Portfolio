@@ -528,6 +528,7 @@
                     <input
                       type="text"
                       id="f-name"
+                      name="name"
                       class="f-input"
                       placeholder="Rahul Sharma"
                       required
@@ -538,37 +539,63 @@
                     <input
                       type="email"
                       id="f-email"
+                      name="email"
                       class="f-input"
                       placeholder="rahul@example.com"
                       required
                     />
                   </div>
                 </div>
+
                 <div class="f-group">
-                  <label class="f-label">Subject</label>
+                  <label class="f-label">Purpose</label>
+                  <select
+                    id="f-purpose"
+                    name="purpose"
+                    class="f-input"
+                    required
+                  >
+                    <option value="">Select Purpose</option>
+                    <option value="Hiring">Hiring (HR)</option>
+                    <option value="Freelance">Freelance Project</option>
+                    <option value="Collab">Collaboration</option>
+                    <option value="Internship">Internship</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+
+                <div class="f-group">
+                  <label class="f-label"
+                    >Budget
+                    <span style="opacity: 0.5; font-size: 11px"
+                      >(optional)</span
+                    ></label
+                  >
                   <input
                     type="text"
-                    id="f-subject"
+                    id="f-budget"
+                    name="budget"
                     class="f-input"
-                    placeholder="Project Collaboration"
+                    placeholder="e.g. ₹5000 / $200 / Unpaid"
                   />
                 </div>
+
                 <div class="f-group">
                   <label class="f-label">Message</label>
                   <textarea
                     id="f-message"
-                    class="f-ta"
                     name="message"
+                    class="f-ta"
                     placeholder="Hey Chetan, I'd love to work with you on..."
                     required
                   ></textarea>
                 </div>
 
                 <div class="f-foot">
-                  <span class="f-note"
-                    ><i class="fa-solid fa-shield-check"></i> Saves to Google
-                    Sheet</span
-                  >
+                  <span class="f-note">
+                    <i class="fa-solid fa-shield-check"></i> Saves to Google
+                    Sheet
+                  </span>
                   <button type="submit" class="f-btn" id="f-btn">
                     <span id="btn-txt">Send Message →</span>
                     <div class="spinner" id="btn-spin"></div>
@@ -602,7 +629,7 @@
     <script>
       // ══ Google Sheet Web App URL ══
       const SHEET_URL =
-        'https://script.google.com/macros/s/AKfycbyodVqcRiT05RqMau3p23NkBAXMIrTf0It7yDPqmbb_D4dAKP2rOSXQ4lFWlDWXz0Ot/exec';
+        'https://script.google.com/macros/s/AKfycbyZd1whs9lwiH2rWKS8SJ6re6EdkSGrnPChJUFSfiFmVAtQOqDenLHKSxuro1ssbGEjxA/exec';
 
       // ── Year ──
       document.getElementById('yr').textContent = new Date().getFullYear();
@@ -723,21 +750,26 @@
         .getElementById('contact-form')
         .addEventListener('submit', async function (e) {
           e.preventDefault();
+
           const btn = document.getElementById('f-btn');
           const btnTxt = document.getElementById('btn-txt');
           const spin = document.getElementById('btn-spin');
 
-          // ✅ All 4 fields properly collected
           const payload = {
             name: document.getElementById('f-name').value.trim(),
             email: document.getElementById('f-email').value.trim(),
-            subject: document.getElementById('f-subject').value.trim(),
+            purpose: document.getElementById('f-purpose').value.trim(),
+            budget: document.getElementById('f-budget').value.trim(),
             message: document.getElementById('f-message').value.trim(),
           };
 
-          // Validation
-          if (!payload.name || !payload.email || !payload.message) {
-            toast('⚠️ Name, Email and Message required!', 'e');
+          if (
+            !payload.name ||
+            !payload.email ||
+            !payload.purpose ||
+            !payload.message
+          ) {
+            toast('⚠️ Name, Email, Purpose and Message required!', 'e');
             return;
           }
 
@@ -746,17 +778,17 @@
           spin.style.display = 'block';
 
           try {
-            // ✅ no-cors mode — data save ho jaata hai silently
             await fetch(SHEET_URL, {
               method: 'POST',
               mode: 'no-cors',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify(payload),
+              body: new URLSearchParams(payload),
             });
+
             toast('✅ Message sent! Will reply soon.', 's');
             e.target.reset();
           } catch (err) {
-            toast('❌ Network error! Try email directly.', 'e');
+            toast('❌ Network error! Try again.', 'e');
+            console.error(err);
           } finally {
             btn.disabled = false;
             btnTxt.textContent = 'Send Message →';

@@ -72,8 +72,6 @@ body {
     color 0.35s;
 }
 
-
-
 /* ── Custom Cursor ── */
 .cur {
   width: 9px;
@@ -1136,6 +1134,14 @@ nav.scrolled {
   letter-spacing: 1.5px;
   text-transform: uppercase;
   color: var(--gray2);
+}
+select.f-input {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23b8ff00' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  cursor: pointer;
 }
 .f-input,
 .f-ta {
