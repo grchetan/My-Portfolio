@@ -507,13 +507,13 @@ nav.scrolled {
     opacity: 1;
   }
 }
-.hero-img {
+.hero-img { 
   width: 210px;
   height: 250px;
   border-radius: 22px;
   object-fit: cover;
   object-position: top center;
-  border: 2px solid var(--border);
+ 
   display: block;
   filter: grayscale(10%);
   transition:
