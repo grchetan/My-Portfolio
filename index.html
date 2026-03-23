@@ -17,6 +17,26 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     />
     <link rel="stylesheet" href="./style.css" />
+
+    <!--  -->
+    <script>
+      (function () {
+        var url =
+          'https://script.google.com/macros/s/AKfycby0cm2hNwFnaxwGEcOsrk3KJefwNUDcrcDhSUHndZ01xNFDa1Dkv0EMVjdPRWGKH3z5/exec';
+        fetch(
+          url +
+            '?action=track&page=' +
+            encodeURIComponent(location.pathname) +
+            '&ref=' +
+            encodeURIComponent(document.referrer) +
+            '&ua=' +
+            encodeURIComponent(navigator.userAgent) +
+            '&screen=' +
+            encodeURIComponent(screen.width + 'x' + screen.height),
+          { mode: 'no-cors' },
+        );
+      })();
+    </script>
   </head>
   <body>
     <div class="cur" id="cur"></div>
