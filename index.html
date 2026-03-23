@@ -25,7 +25,14 @@
 
     <!-- ══ Mobile Menu ══ -->
     <div class="mobile-menu" id="mob-menu">
-      <span class="mob-close-hint">ESC to close</span>
+      <button
+        class="mob-close-btn"
+        id="mob-close-btn"
+        aria-label="Close menu"
+        onclick="closeMob()"
+      >
+        <i class="fa-solid fa-xmark"></i>
+      </button>
       <nav class="mob-links">
         <a href="#home" onclick="closeMob()">Home</a>
         <a href="#about" onclick="closeMob()">About</a>
@@ -103,7 +110,7 @@
               class="hero-img"
               id="hero-img"
             />
-            <div class="img-badge">🚀 Full Stack Dev</div>
+            <div class="img-badge">Full Stack Dev</div>
           </div>
         </div>
         <div class="hero-bottom">
@@ -612,9 +619,15 @@
           <a href="#home" class="ft-logo">CP<span>.</span></a>
           <p class="ft-copy">
             © <span id="yr"></span> Chetan Prajapat. All rights reserved.
+            <a
+              href="https://grchetan.github.io/sitereadypro"
+              style="text-decoration: none"
+              >Powered by SiteReadyPro</a
+            >
           </p>
           <a href="https://grchetan.github.io/" target="_blank" class="ft-res"
             >Resume ↗</a
+          >
           >
         </div>
       </div>
