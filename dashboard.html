@@ -1244,7 +1244,7 @@ function doGet(e) {
 
       // To change: generate new hash at https://emn178.github.io/online-tools/sha256.html
       const PASS_HASH =
-        '240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9';
+        'de0de6b65a4118bfd8e562245ea0e5ff1d17b0ed71074be8b8329d72b1a794d3';
       let SCRIPT_URL = localStorage.getItem('cp-script-url') || '';
       let chart = null;
       let refreshTimer = null;
@@ -1583,6 +1583,99 @@ function doGet(e) {
         if (/Linux/i.test(ua)) return '🐧 Linux';
         return '🌐 Unknown';
       }
+    </script>
+
+    <script>
+      /* ============================================================
+     🔐 SECURITY LAYER — Anti-Inspect Protections
+  ============================================================ */
+
+      // 1. RIGHT-CLICK DISABLE
+      document.addEventListener('contextmenu', (e) => e.preventDefault());
+
+      // 2. KEYBOARD SHORTCUTS BLOCK
+      document.addEventListener('keydown', (e) => {
+        const blocked = [
+          e.key === 'F12',
+          e.ctrlKey &&
+            e.shiftKey &&
+            ['I', 'J', 'C', 'K'].includes(e.key.toUpperCase()),
+          e.ctrlKey && e.key.toUpperCase() === 'U',
+          e.metaKey && e.altKey && e.key.toUpperCase() === 'I',
+        ];
+        if (blocked.some(Boolean)) {
+          e.preventDefault();
+          e.stopPropagation();
+          return false;
+        }
+      });
+
+      // 3. DEVTOOLS DETECTION (size-based + debugger trick)
+      const overlay = document.getElementById('devtools-overlay');
+
+      function checkDevTools() {
+        const threshold = 160;
+        const widthDiff = window.outerWidth - window.innerWidth > threshold;
+        const heightDiff = window.outerHeight - window.innerHeight > threshold;
+        if (widthDiff || heightDiff) {
+          overlay.classList.add('active');
+          document.body.style.filter = 'blur(8px)';
+        } else {
+          overlay.classList.remove('active');
+          document.body.style.filter = '';
+        }
+      }
+
+      setInterval(checkDevTools, 500);
+      window.addEventListener('resize', checkDevTools);
+
+      // 4. DEBUGGER TRAP (slows down timeline recording)
+      setInterval(function () {
+        (function () {
+          /* no-op — marker only */
+          const start = performance.now();
+          // eslint-disable-next-line no-debugger
+          debugger;
+          if (performance.now() - start > 100) {
+            overlay.classList.add('active');
+            document.body.style.filter = 'blur(8px)';
+          }
+        })();
+      }, 1000);
+
+      // 5. DISABLE DRAG
+      document.addEventListener('dragstart', (e) => e.preventDefault());
+
+      // 6. DISABLE PRINT SCREEN warning (soft — can't fully prevent)
+      document.addEventListener('keyup', (e) => {
+        if (e.key === 'PrintScreen') {
+          navigator.clipboard.writeText('').catch(() => {});
+        }
+      });
+
+      // 7. DISABLE COPY
+      document.addEventListener('copy', (e) => {
+        e.clipboardData.setData('text/plain', '');
+        e.preventDefault();
+      });
+
+      // 8. VISIBILITY CHANGE — blur on tab switch
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+          document.body.style.filter = 'blur(10px)';
+        } else {
+          checkDevTools();
+          if (!overlay.classList.contains('active')) {
+            document.body.style.filter = '';
+          }
+        }
+      });
+
+      console.log('%c⛔ STOP!', 'color:red;font-size:48px;font-weight:bold');
+      console.log(
+        '%cThis is a secure banking interface. Unauthorized access is monitored and logged.',
+        'color:#c9a84c;font-size:14px',
+      );
     </script>
   </body>
 </html>
