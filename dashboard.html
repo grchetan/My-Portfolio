@@ -1659,18 +1659,6 @@ function doGet(e) {
         e.preventDefault();
       });
 
-      // 8. VISIBILITY CHANGE — blur on tab switch
-      document.addEventListener('visibilitychange', () => {
-        if (document.hidden) {
-          document.body.style.filter = 'blur(10px)';
-        } else {
-          checkDevTools();
-          if (!overlay.classList.contains('active')) {
-            document.body.style.filter = '';
-          }
-        }
-      });
-
       console.log('%c⛔ STOP!', 'color:red;font-size:48px;font-weight:bold');
       console.log(
         '%cThis is a secure banking interface. Unauthorized access is monitored and logged.',

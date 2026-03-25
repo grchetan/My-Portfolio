@@ -72,8 +72,14 @@ body {
     color 0.35s;
 }
 
+body {
+  cursor: none;
+}
+* {
+  cursor: none;
+}
 /* ── Custom Cursor ── */
-.cur {
+/* .cur {
   width: 9px;
   height: 9px;
   background: var(--lime);
@@ -98,7 +104,7 @@ body {
     top 0.13s ease,
     width 0.18s,
     height 0.18s;
-}
+} */
 
 body::before {
   content: '';

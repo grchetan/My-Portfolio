@@ -14,7 +14,6 @@
   const mouse = { x: -999, y: -999 };
   const DOTS = 18;
   const trail = Array.from({ length: DOTS }, () => ({ x: -999, y: -999 }));
-  const MAX_P = 40;
   const parts = [];
   let hue = 0,
     frame = 0;
@@ -30,6 +29,7 @@
         t.y = e.clientY;
       });
   });
+
   window.addEventListener(
     'touchmove',
     (e) => {
@@ -38,6 +38,7 @@
     },
     { passive: true },
   );
+
   window.addEventListener('mousedown', (e) => {
     for (let i = 0; i < 12; i++) parts.push(newDot(e.clientX, e.clientY));
   });
@@ -62,9 +63,8 @@
     hue = (hue + 0.8) % 360;
     frame++;
 
-    ctx.globalCompositeOperation = 'source-over';
-    ctx.fillStyle = 'rgba(0,0,0,0.2)';
-    ctx.fillRect(0, 0, W, H);
+    // ✅ Fully clear canvas every frame — no black fill, site stays visible
+    ctx.clearRect(0, 0, W, H);
 
     // Trail update
     trail[0].x += (mouse.x - trail[0].x) * 0.5;
@@ -75,7 +75,7 @@
     }
 
     // Draw ribbon
-    ctx.globalCompositeOperation = 'lighter';
+    ctx.globalCompositeOperation = 'source-over';
     ctx.lineJoin = 'round';
     ctx.lineCap = 'round';
     for (let i = 1; i < DOTS; i++) {
@@ -84,10 +84,10 @@
       ctx.beginPath();
       ctx.moveTo(trail[i - 1].x, trail[i - 1].y);
       ctx.lineTo(trail[i].x, trail[i].y);
-      ctx.strokeStyle = `hsla(${h},100%,65%,${t * 0.6})`;
+      ctx.strokeStyle = `hsla(${h},100%,65%,${t * 0.85})`;
       ctx.lineWidth = t * 5;
-      ctx.shadowColor = `hsla(${h},100%,70%,0.5)`;
-      ctx.shadowBlur = 6;
+      ctx.shadowColor = `hsla(${h},100%,70%,0.6)`;
+      ctx.shadowBlur = 8;
       ctx.stroke();
     }
 
@@ -96,7 +96,7 @@
     const dy = trail[0].y - trail[1].y;
     if (
       Math.sqrt(dx * dx + dy * dy) > 2 &&
-      parts.length < MAX_P &&
+      parts.length < 40 &&
       frame % 2 === 0
     )
       parts.push(newDot(mouse.x, mouse.y));
