@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://grchetan.github.io/sitemap.xml
