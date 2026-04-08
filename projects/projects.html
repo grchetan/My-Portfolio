@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Projects Archive</title>
+    <meta
+      name="description"
+      content="A fully custom-built portfolio website showcasing my skills, projects, and certifications. Designed from scratch with modern aesthetics, smooth animations, and "
+    />
+    <meta name="author" content="Chetan Prajapat" />
+    <meta property="og:title" content="Portfolio Website — Chetan Prajapat" />
+    <meta
+      property="og:description"
+      content="A fully custom-built portfolio website showcasing my skills, projects, and certifications. Designed from scratch with modern aesthetics, smooth animations, and "
+    />
+    <meta
+      property="og:url"
+      content="https://grchetan.github.io/projects/portfolio.html"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Space+Grotesk:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="./project-style.css" />
+
+    <style>
+      /* Project 3d cards style */
+      .projects {
+        padding-bottom: 7rem;
+      }
+      .proj-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+        gap: 1.8rem;
+      }
+      .proj-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: var(--r);
+        padding: 2.2rem;
+        display: flex;
+        flex-direction: column;
+        text-decoration: none;
+        color: inherit;
+        transform-style: preserve-3d;
+        transform: perspective(1000px);
+        transition:
+          border-color 0.3s,
+          box-shadow 0.3s,
+          transform 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+      .proj-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--neon),
+          transparent
+        );
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+      .proj-card:hover {
+        border-color: var(--neon-border);
+      }
+      .proj-card:hover::before {
+        opacity: 1;
+      }
+      .proj-card:hover {
+        box-shadow:
+          0 12px 40px rgba(111, 191, 31, 0.12),
+          0 0 24px rgba(111, 191, 31, 0.08);
+      }
+
+      .proj-card > * {
+        transform: translateZ(20px);
+      }
+      .proj-n {
+        font-family: monospace;
+        font-size: 0.78rem;
+        letter-spacing: 2px;
+        color: var(--gray2);
+        margin-bottom: 1rem;
+      }
+      .proj-name {
+        font-family: var(--font-syne);
+        font-size: 1.5rem;
+        font-weight: 800;
+        color: var(--white);
+        margin-bottom: 0.8rem;
+        line-height: 1.2;
+      }
+      .proj-desc {
+        font-size: 0.9rem;
+        color: var(--gray);
+        line-height: 1.75;
+        flex-grow: 1;
+        margin-bottom: 1.2rem;
+      }
+      .proj-tech {
+        display: flex;
+        gap: 0.6rem;
+        flex-wrap: wrap;
+        margin-bottom: 1.4rem;
+      }
+      .proj-tech span {
+        font-size: 0.75rem;
+        color: var(--neon);
+        background: var(--neon-dim);
+        border: 1px solid var(--neon-border);
+        padding: 4px 11px;
+        border-radius: 20px;
+        font-family: monospace;
+        font-weight: 600;
+      }
+      .proj-footer {
+        margin-top: auto;
+      }
+      .proj-link-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        font-size: 0.82rem;
+        font-weight: 700;
+        color: var(--neon);
+        letter-spacing: 0.3px;
+        transition: gap 0.2s;
+      }
+      .proj-link-btn:hover {
+        gap: 11px;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="cursor-canvas"></canvas>
+    <div class="cursor-dot" id="cursor-dot"></div>
+    <div class="cursor-outline" id="cursor-outline"></div>
+
+    <!-- NAV -->
+    <nav class="p-nav" id="p-nav">
+      <a href="../index.html" class="p-nav-logo">CP<span>.</span></a>
+      <div class="p-nav-right">
+        <a href="../index.html#projects" class="p-nav-back">
+          <i class="fa-solid fa-arrow-left"></i> Back to Projects
+        </a>
+        <button
+          class="theme-toggle"
+          id="theme-toggle"
+          aria-label="Toggle Theme"
+        >
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            id="theme-icon"
+          >
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+        </button>
+      </div>
+    </nav>
+
+    <!-- PROJECT HERO -->
+    <div class="proj-hero">
+      <div class="container">
+        <div class="proj-back-mobile">
+          <a href="../index.html#projects"
+            ><i class="fa-solid fa-arrow-left"></i> Back to Projects</a
+          >
+        </div>
+        <span class="proj-hero-num rv">001</span>
+        <h1 class="proj-hero-title rv d1">
+          Projects<br /><span>Archive</span>
+        </h1>
+        <div class="proj-meta rv d2">
+          <div class="proj-meta-item">
+            <div class="proj-meta-label">Role</div>
+            <div class="proj-meta-val">Full Stack Developer</div>
+          </div>
+          <div class="proj-meta-item">
+            <div class="proj-meta-label">Category</div>
+            <div class="proj-meta-val">All</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ PROJECTS ══ -->
+    <section id="projects" class="sec projects">
+      <div class="container">
+        <div class="proj-grid">
+          <a href="./portfolio" class="proj-card tilt-card rv" target="_blank">
+            <div class="proj-n">001</div>
+            <div class="proj-name">Portfolio Website</div>
+            <div class="proj-desc">
+              Responsive portfolio showcasing skills, projects, and
+              certifications — built from scratch with modern design and custom
+              interactions.
+            </div>
+            <div class="proj-tech">
+              <span>HTML5</span><span>CSS3</span><span>JavaScript</span>
+            </div>
+            <div class="proj-footer">
+              <span class="proj-link-btn"
+                >Explore Project <i class="fa-solid fa-arrow-right"></i
+              ></span>
+            </div>
+          </a>
+
+          <a href="rog" class="proj-card tilt-card rv d1" target="_blank">
+            <div class="proj-n">002</div>
+            <div class="proj-name">ASUS ROG Website Clone</div>
+            <div class="proj-desc">
+              Pixel-perfect clone of the ASUS ROG website with modern UI and
+              high-performance gaming aesthetics.
+            </div>
+            <div class="proj-tech">
+              <span>HTML5</span><span>CSS3</span><span>JavaScript</span>
+            </div>
+            <div class="proj-footer">
+              <span class="proj-link-btn"
+                >Explore Project <i class="fa-solid fa-arrow-right"></i
+              ></span>
+            </div>
+          </a>
+
+          <a href="./travel" class="proj-card tilt-card rv d2" target="_blank">
+            <div class="proj-n">003</div>
+            <div class="proj-name">Travel Itinerary Generator</div>
+            <div class="proj-desc">
+              AI-powered web app that generates custom travel itineraries based
+              on user preferences and destinations.
+            </div>
+            <div class="proj-tech">
+              <span>JavaScript</span><span>LLM API</span><span>CSS3</span>
+            </div>
+            <div class="proj-footer">
+              <span class="proj-link-btn"
+                >Explore Project <i class="fa-solid fa-arrow-right"></i
+              ></span>
+            </div>
+          </a>
+
+          <a href="./weather" class="proj-card tilt-card rv" target="_blank">
+            <div class="proj-n">004</div>
+            <div class="proj-name">Weather Forecast App</div>
+            <div class="proj-desc">
+              Real-time weather application using API integration. Search any
+              location and get live forecasts with clean UI.
+            </div>
+            <div class="proj-tech">
+              <span>JavaScript</span><span>REST API</span><span>CSS3</span>
+            </div>
+            <div class="proj-footer">
+              <span class="proj-link-btn"
+                >Explore Project <i class="fa-solid fa-arrow-right"></i
+              ></span>
+            </div>
+          </a>
+
+      
+
+          <a
+            href="./sitereadypro"
+            class="proj-card tilt-card rv d2"
+            target="_blank"
+          >
+            <div class="proj-n">006</div>
+            <div class="proj-name">SiteReadyPro Template</div>
+            <div class="proj-desc">
+              Professional business website template for modern companies —
+              responsive layout with clean and structured UI.
+            </div>
+            <div class="proj-tech">
+              <span>HTML5</span><span>CSS3</span><span>JavaScript</span>
+            </div>
+            <div class="proj-footer">
+              <span class="proj-link-btn"
+                >Explore Project <i class="fa-solid fa-arrow-right"></i
+              ></span>
+            </div>
+          </a>
+
+          <a
+            href="./calculator"
+            class="proj-card tilt-card rv d1"
+            target="_blank"
+          >
+            <div class="proj-n">007</div>
+            <div class="proj-name">Calculator Web App</div>
+            <div class="proj-desc">
+              Functional and clean calculator application — intuitive interface
+              with full operations support.
+            </div>
+            <div class="proj-tech">
+              <span>HTML5</span><span>CSS3</span><span>JavaScript</span>
+            </div>
+            <div class="proj-footer">
+              <span class="proj-link-btn"
+                >Explore Project <i class="fa-solid fa-arrow-right"></i
+              ></span>
+            </div>
+          </a>
+
+          <a href="./video" class="proj-card tilt-card rv d2" target="_blank">
+            <div class="proj-n">008</div>
+            <div class="proj-name">Video Editing Showcase</div>
+            <div class="proj-desc">
+              Dynamic video editing webpage showcasing creative video content
+              and cinematic production skills.
+            </div>
+            <div class="proj-tech">
+              <span>Video Editing</span><span>HTML5</span><span>CSS3</span>
+            </div>
+            <div class="proj-footer">
+              <span class="proj-link-btn"
+                >Explore Project <i class="fa-solid fa-arrow-right"></i
+              ></span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="proj-footer">
+      <a href="../index.html" class="proj-footer-logo">CP<span>.</span></a>
+      <p class="proj-footer-copy">© <span id="yr"></span> Chetan Prajapat</p>
+    </footer>
+
+    <script src="./project.js"></script>
+  </body>
+</html>

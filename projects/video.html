@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Video Editing Showcase — Chetan Prajapat</title>
+    <meta
+      name="description"
+      content="A dynamic showcase webpage displaying my video editing work and cinematic production skills. The page highlights creative video content, transitions, color grad"
+    />
+    <meta name="author" content="Chetan Prajapat" />
+    <meta
+      property="og:title"
+      content="Video Editing Showcase — Chetan Prajapat"
+    />
+    <meta
+      property="og:description"
+      content="A dynamic showcase webpage displaying my video editing work and cinematic production skills. The page highlights creative video content, transitions, color grad"
+    />
+    <meta
+      property="og:url"
+      content="https://grchetan.github.io/projects/video.html"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Space+Grotesk:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="./project-style.css" />
+  </head>
+  <body>
+    <canvas id="cursor-canvas"></canvas>
+    <div class="cursor-dot" id="cursor-dot"></div>
+    <div class="cursor-outline" id="cursor-outline"></div>
+
+    <!-- NAV -->
+    <nav class="p-nav" id="p-nav">
+      <a href="../index.html" class="p-nav-logo">CP<span>.</span></a>
+      <div class="p-nav-right">
+        <a href="../index.html#projects" class="p-nav-back">
+          <i class="fa-solid fa-arrow-left"></i> Back to Projects
+        </a>
+        <button
+          class="theme-toggle"
+          id="theme-toggle"
+          aria-label="Toggle Theme"
+        >
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            id="theme-icon"
+          >
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+        </button>
+      </div>
+    </nav>
+
+    <!-- PROJECT HERO -->
+    <div class="proj-hero">
+      <div class="container">
+        <div class="proj-back-mobile">
+          <a href="../index.html#projects"
+            ><i class="fa-solid fa-arrow-left"></i> Back to Projects</a
+          >
+        </div>
+        <span class="proj-hero-num rv">008</span>
+        <h1 class="proj-hero-title rv d1">
+          Video Editing<br /><span>Showcase</span>
+        </h1>
+        <div class="proj-meta rv d2">
+          <div class="proj-meta-item">
+            <div class="proj-meta-label">Role</div>
+            <div class="proj-meta-val">Video Editor & Developer</div>
+          </div>
+          <div class="proj-meta-item">
+            <div class="proj-meta-label">Category</div>
+            <div class="proj-meta-val">Creative Portfolio</div>
+          </div>
+          <div class="proj-meta-item">
+            <div class="proj-meta-label">Tech Stack</div>
+            <div class="proj-meta-tags">
+              <span>Video Editing</span> <span>HTML5</span> <span>CSS3</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECT IMAGE -->
+    <div class="proj-img-wrap">
+      <div class="container">
+        <div class="proj-img-box rv">
+          <div class="proj-img-placeholder">
+            <i class="fa-solid fa-image"></i>
+            <span>Project screenshot coming soon</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECT CONTENT -->
+    <div class="proj-content">
+      <div class="container">
+        <div class="proj-section">
+          <h2>Overview</h2>
+          <p>
+            A dynamic showcase webpage displaying my video editing work and
+            cinematic production skills. The page highlights creative video
+            content, transitions, color grading, and motion graphics work.
+          </p>
+        </div>
+
+        <div class="proj-divider"></div>
+
+        <div class="proj-section">
+          <h2>The Challenge</h2>
+          <p>
+            Creating a page that does justice to the visual quality of video
+            content while loading quickly and not overwhelming visitors. The
+            design needed to feel cinematic and match the energy of the video
+            work itself.
+          </p>
+        </div>
+
+        <div class="proj-divider"></div>
+
+        <div class="proj-section">
+          <h2>The Solution</h2>
+          <p>
+            Designed a bold, fullscreen-first layout that lets the videos take
+            center stage. Used autoplay previews with hover interactions to give
+            visitors a taste of each video without requiring full playback. The
+            dark aesthetic complements the cinematic content.
+          </p>
+        </div>
+
+        <div class="proj-divider"></div>
+
+        <div class="proj-section">
+          <h2>Key Features</h2>
+          <div class="feat-list">
+            <div class="feat-item">
+              Cinematic dark UI that complements video content
+            </div>
+            <div class="feat-item">
+              Video preview cards with hover interactions
+            </div>
+            <div class="feat-item">
+              Category filtering for different video types
+            </div>
+            <div class="feat-item">Fullscreen video playback support</div>
+            <div class="feat-item">
+              Responsive grid layout for all screen sizes
+            </div>
+            <div class="feat-item">
+              Fast-loading with lazy video initialization
+            </div>
+          </div>
+        </div>
+
+        <div class="proj-cta rv">
+          <a
+            href="https://grchetan.github.io/videoSamples.html"
+            target="_blank"
+            class="btn-proj-fill"
+          >
+            View Live Site
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </a>
+          <a
+            href="https://github.com/grchetan"
+            target="_blank"
+            class="btn-proj-out"
+          >
+            View Source Code <i class="fab fa-github"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="proj-footer">
+      <a href="../index.html" class="proj-footer-logo">CP<span>.</span></a>
+      <p class="proj-footer-copy">© <span id="yr"></span> Chetan Prajapat</p>
+    </footer>
+
+    <script src="./project.js"></script>
+  </body>
+</html>
