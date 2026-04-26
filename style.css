@@ -1393,6 +1393,21 @@ body {
   .mobile-menu {
     display: flex;
     width: 100%;
+    overflow-y: auto;
+    padding: 80px 20px 30px;
+  }
+  /* Fix: social icons cut off on small screens */
+  .mob-socials {
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-bottom: 10px;
+    margin-top: 1rem;
+  }
+  /* Fix: CERTIFICATIONS header overflow */
+  .sec-t {
+    font-size: clamp(22px, 5.5vw, 42px);
+    word-break: break-word;
+    overflow-wrap: break-word;
   }
   .c-bio,
   .c-role,
